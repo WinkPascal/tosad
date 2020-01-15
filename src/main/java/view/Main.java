@@ -29,9 +29,7 @@ public class Main extends Application {
         showMainView();
         showMainItems();
 
-
     }
-
 
     private void showMainView() throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -51,14 +49,14 @@ public class Main extends Application {
         System.out.println(getClass().getClassLoader().getResource("MainItems.fxml"));
         BorderPane mainView = loader.load();
         mainLayout.setCenter(mainView);
+
     }
+
     public void showNewAttributeRangeRule() throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("NewAttributeRangeRule.fxml"));
         AnchorPane AttributeRangeRuleView = loader.load();
         mainLayout.setCenter(AttributeRangeRuleView);
-
-
 
     }
 

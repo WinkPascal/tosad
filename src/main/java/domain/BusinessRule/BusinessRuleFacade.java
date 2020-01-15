@@ -14,7 +14,7 @@ public class BusinessRuleFacade {
 	private String operator;
 	private String catagory;
 	
-	//als je een nieuwe buesines ruile wilt aanmaken eerst define naarna create
+	//als je een nieuwe buesines rule wilt aanmaken eerst define naarna create
 	// BusinessRuleInterfac
 	public void getBusinessRule() {
 		switch(catagory) {

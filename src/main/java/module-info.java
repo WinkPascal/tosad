@@ -6,7 +6,4 @@ module TOSAD {
     opens view to javafx.base, javafx.fxml;
     opens controler to javafx.base , javafx.fxml;
 
-
-
-
 }
