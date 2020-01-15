@@ -11,7 +11,7 @@ public class AttributeRuleFactory implements BusinessRuleFactoryStrategy{
 	@Override
 	public AttributeRuleInterface defineBusinessRule(String operator, List<Attribute> attributes) {
 		switch() {
-		
+
 		}
 		return null;
 	}

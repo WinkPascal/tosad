@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -13,6 +14,12 @@ import java.io.IOException;
 public class Main extends Application {
     private Stage primaryStage;
     private static BorderPane mainLayout;
+
+    private static final Main INSTANCE = new Main();
+
+    public static Main getInstance(){
+        return INSTANCE;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -42,12 +49,16 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("MainItems.fxml"));
         System.out.println(getClass().getClassLoader().getResource("MainItems.fxml"));
-        BorderPane trainView = loader.load();
-        mainLayout.setCenter(trainView);
+        BorderPane mainView = loader.load();
+        mainLayout.setCenter(mainView);
     }
-    private void showNewAttributeRangeRule(){
+    public void showNewAttributeRangeRule() throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("NewAttributeRangeRule.fxml"));
+        AnchorPane AttributeRangeRuleView = loader.load();
+        mainLayout.setCenter(AttributeRangeRuleView);
+
+
 
     }
 
