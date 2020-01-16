@@ -1,5 +1,5 @@
 package domain.businessRuleGenerator;
 
-public interface AttributeRuleInterface {
+public interface BusinessRuleStrategy {
 	public String createBusinessRule();
 }

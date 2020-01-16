@@ -2,9 +2,15 @@ package domain.BusinessRule;
 
 import java.util.List;
 
-import domain.businessRuleGenerator.AttributeRuleInterface;
-import domain.businessRuleGenerator.BusinessRuleFactoryStrategy;
-import domain.businessRuleGenerator.AttributeRule.AttributeRuleFactory;
+import domain.businessRuleGenerator.BusinessRuleStrategy;
+import domain.businessRuleGenerator.AttributeRule.AttributeCompareRule;
+import domain.businessRuleGenerator.AttributeRule.AttributeListRule;
+import domain.businessRuleGenerator.AttributeRule.AttributeOtherRule;
+import domain.businessRuleGenerator.AttributeRule.AttributeRangeRule;
+import domain.businessRuleGenerator.EntityRule.EntityOtherRule;
+import domain.businessRuleGenerator.InterEntityRule.InterEntityCompareRule;
+import domain.businessRuleGenerator.TupleRule.TupleCompareRule;
+import domain.businessRuleGenerator.TupleRule.TupleOtherRule;
 
 public class BusinessRuleFacade {
 	private List<Attribute> attributes;
@@ -14,23 +20,43 @@ public class BusinessRuleFacade {
 	private String operator;
 	private String catagory;
 	
-	//als je een nieuwe buesines rule wilt aanmaken eerst define naarna create
-	// BusinessRuleInterfac
-	public void getBusinessRule() {
-		switch(catagory) {
-		case "attributeRule":
-			BusinessRuleFactoryStrategy factory = new AttributeRuleFactory();
-			AttributeRuleInterface rule = factory.defineBusinessRule(operator, attributes);
+
+	private BusinessRuleStrategy getBusinessRule() {
+		BusinessRuleStrategy rule = null;
+		switch(code) {
+		//attribute rules
+		case "ARNG":
+			rule = new AttributeRangeRule();
 			break;
-		case "tupleRule":
+		case "ACMP":
+			rule = new AttributeCompareRule();
 			break;
-		case "interEntityRule":
+		case "ALIS":
+			rule = new AttributeListRule();
 			break;
-		case "entityRule":
+		case "AOTH":
+			rule = new AttributeOtherRule();
 			break;
-		case "changeEventRule":
-			
-			break;			
+		//tuple rules
+		case "TCMP":
+			rule = new TupleCompareRule();
+			break;
+		case "TOTH":
+			rule = new TupleOtherRule();
+			break;
+		// inter entity rule
+		case "ICMP":
+			rule = new InterEntityCompareRule();
+			break;
+		//entity rule
+		case "EOTH":
+			rule = new EntityOtherRule();
+			break;
+		//mofiy rule
+		case "MODI":
+			rule = new AttributeListRule();
+			break;		
 		}
+		return rule;
 	}
 }

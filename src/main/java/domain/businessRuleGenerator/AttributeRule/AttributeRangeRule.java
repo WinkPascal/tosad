@@ -1,8 +1,13 @@
 package domain.businessRuleGenerator.AttributeRule;
 
-import domain.businessRuleGenerator.AttributeRuleInterface;
-import domain.businessRuleGenerator.BusinessRuleFactoryStrategy;
+import domain.businessRuleGenerator.BusinessRuleStrategy;
 
-public class AttributeRangeRule implements AttributeRuleInterface{
+public class AttributeRangeRule implements BusinessRuleStrategy{
+
+	@Override
+	public String createBusinessRule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

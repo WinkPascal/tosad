@@ -1,7 +1,13 @@
 package domain.businessRuleGenerator.TupleRule;
 
-import domain.businessRuleGenerator.AttributeRuleInterface;
+import domain.businessRuleGenerator.BusinessRuleStrategy;
 
-public class TupleCompareRule implements AttributeRuleInterface {
+public class TupleCompareRule implements BusinessRuleStrategy {
+
+	@Override
+	public String createBusinessRule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

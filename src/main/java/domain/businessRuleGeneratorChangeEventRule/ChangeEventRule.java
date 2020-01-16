@@ -1,7 +1,13 @@
 package domain.businessRuleGeneratorChangeEventRule;
 
-import domain.businessRuleGenerator.AttributeRuleInterface;
+import domain.businessRuleGenerator.BusinessRuleStrategy;
 
-public class ChangeEventRule implements AttributeRuleInterface {
+public class ChangeEventRule implements BusinessRuleStrategy {
+
+	@Override
+	public String createBusinessRule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
