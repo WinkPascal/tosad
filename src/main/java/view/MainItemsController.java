@@ -10,6 +10,12 @@ public class MainItemsController {
     public void openNewAttributeRangeRule() throws IOException, ParseException {
         main.showNewAttributeRangeRule();
     }
+    public void openNewAttributeCompareRule() throws IOException, ParseException {
+        main.showNewAttributeCompareRule();
+    }
+    public void openNewAttributeListRule() throws IOException, ParseException{
+        main.showNewAttributeListRule();
+    }
 
 
     }

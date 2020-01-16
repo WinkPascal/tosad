@@ -12,8 +12,8 @@
           <Menu mnemonicParsing="false" text="New">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#openNewAttributeRangeRule" text="Attribute Range rule" />
-                  <MenuItem mnemonicParsing="false" text="Attribute Compare rule" />
-                  <MenuItem mnemonicParsing="false" text="Attribute List rule" />
+                  <MenuItem mnemonicParsing="false" onAction="#openNewAttributeCompareRule" text="Attribute Compare rule" />
+                  <MenuItem mnemonicParsing="false" onAction="#openNewAttributeListRule" text="Attribute List rule" />
                   <MenuItem mnemonicParsing="false" text="Attribute Other rule" />
                   <MenuItem mnemonicParsing="false" text="Tuple Compare rule" />
                   <MenuItem mnemonicParsing="false" text="Tuple Other rule" />
