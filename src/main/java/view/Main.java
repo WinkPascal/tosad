@@ -55,11 +55,24 @@ public class Main extends Application {
     public void showNewAttributeRangeRule() throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("NewAttributeRangeRule.fxml"));
-        AnchorPane AttributeRangeRuleView = loader.load();
-        mainLayout.setCenter(AttributeRangeRuleView);
+        AnchorPane attributeRangeRuleView = loader.load();
+        mainLayout.setCenter(attributeRangeRuleView);
 
     }
+    public void showNewAttributeCompareRule() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("NewAttributeCompareRule.fxml"));
+        AnchorPane attributeCompareRule = loader.load();
+        mainLayout.setCenter(attributeCompareRule);
 
+    }
+    public void showNewAttributeListRule() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("NewAttributeListRule.fxml"));
+        AnchorPane attributeListRule = loader.load();
+        mainLayout.setCenter(attributeListRule);
+
+    }
 
 
 
