@@ -12,14 +12,14 @@ public class AttributeCompareRule implements BusinessRuleStrategy{
 	//voorbeeld
 	
 	//create or replace trigger "id"
-	//BEFORE insert or update of "attribute naam"
-	//ON "table name"
+	//AFTER insert or update 
+	//ON "table name"."attribute name"
 	//DECLARE
-	//attribute varchar2(255) 
+		//attribute varchar2(255) 
 	//BEGIN
-	//if attribute >  'losse attribuut' then
-	//	insert into error() values();
-	//end if;
+		//if attribute > of < of != of == of >= of <= 'losse attribuut' then
+		//	insert into error() values();
+		//end if;
 	//end id;
 
 	
