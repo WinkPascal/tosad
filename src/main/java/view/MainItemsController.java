@@ -16,6 +16,9 @@ public class MainItemsController {
     public void openNewAttributeListRule() throws IOException, ParseException{
         main.showNewAttributeListRule();
     }
+    public void openNewAttributeOtherRule() throws IOException, ParseException{
+        main.showNewAttributeOtherRule();
+    }
 
 
     }

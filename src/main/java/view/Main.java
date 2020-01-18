@@ -73,6 +73,14 @@ public class Main extends Application {
         mainLayout.setCenter(attributeListRule);
 
     }
+    public void showNewAttributeOtherRule() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("NewAttributeOtherRule.fxml"));
+        AnchorPane attributeOtherRule = loader.load();
+        mainLayout.setCenter(attributeOtherRule);
+
+
+    }
 
 
 
