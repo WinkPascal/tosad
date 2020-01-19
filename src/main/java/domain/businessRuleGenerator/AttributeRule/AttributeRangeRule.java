@@ -13,19 +13,23 @@ public class AttributeRangeRule implements BusinessRuleStrategy{
 	
 	//vooorbeeld
 	
-	//create or replace trigger "id"
-	//AFTER insert or update 
-	//ON "table name"."attribute name"
-	//DECLARE
-	//attribute varchar2(255);
-	//value1 = "";
-	//value2 = "";
-	//BEGIN
-	//IF attribute < value1 AND attribute > value2 THEN
-	//	INSERT ERROR;
-	//	ROLLBACK;
-	//END IF;
-	//end "id"
+//	create or replace trigger ARNG
+//	    AFTER insert or update 
+//	    ON entiteit1 FOR EACH ROW
+//	DECLARE
+//	    minLimit int := 5;
+//	    maxLimit int := 10;
+//	    custumAttribute int := :NEW.integerAttribute;
+//	BEGIN
+//	    if custumAttribute > maxLimit then
+//	         Raise_Application_Error (-20343, 'ARNG te groot');
+//	         ROLLBACK;
+//	    end if;
+//	    if custumAttribute < minLimit then
+//	         Raise_Application_Error (-20343, 'tARNG te klein .');
+//	         ROLLBACK;
+//	    end if;
+//	END ARNG;
 	
 	@Override
 	public String createBusinessRule() {

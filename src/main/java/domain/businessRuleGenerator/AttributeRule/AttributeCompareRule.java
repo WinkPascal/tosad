@@ -4,25 +4,34 @@ import domain.BusinessRule.Attribute;
 import domain.businessRuleGenerator.BusinessRuleStrategy;
 
 public class AttributeCompareRule implements BusinessRuleStrategy{
+	
 	private int ruleId;
 	private String operator;
 	private Attribute attribuut;
 	private String value;
 	
-	//voorbeeld
 	
-	//create or replace trigger "id"
-	//AFTER insert or update 
-	//ON "table name"."attribute name"
-	//for each row
-	//DECLARE
-		//attribute varchar2(255) 
-	//BEGIN
-		//if attribute > of < of != of == of >= of <= 'losse attribuut' then
-		//	insert into error() values();
-		//	ROLLBACK;
-		//end if;
-	//end id;
+	
+	//voorbeeld
+	//deze is getest
+
+	//ervoor nodig:
+	//trigger id
+	//entiteit 
+	//attribuut uit ddb
+	//costumValue
+	
+//	create or replace trigger ACMP
+//    AFTER insert or update 
+//	   ON entiteit1 FOR EACH ROW
+//	DECLARE
+//	    costumValue int := 10;
+//	BEGIN
+//	    if :NEW.integerAttribute > costumValue then
+//	         Raise_Application_Error (-20343, 'trigger melding G.');
+//	         ROLLBACK;
+//	    end if;
+//	END ACMP;
 
 	
 	@Override

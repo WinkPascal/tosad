@@ -6,7 +6,7 @@ public class ChangeEventRule implements BusinessRuleStrategy {
 
 	@Override
 	public String createBusinessRule() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
