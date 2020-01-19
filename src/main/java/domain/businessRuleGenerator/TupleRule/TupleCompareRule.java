@@ -8,7 +8,7 @@ public class TupleCompareRule implements BusinessRuleStrategy {
 	private String operator;
 	private Attribute attribuut1;
 	private Attribute attribuut2;
-	
+
 	//voorbeeld
 	//CREATE or REPLACE trigger TupleCompareRule
 		//AFTER insert or update
@@ -17,11 +17,16 @@ public class TupleCompareRule implements BusinessRuleStrategy {
 		//attribuut1 date := :NEW.attribuut1;
 		//attribuut2 date := :NEW.attribuut2;
 	//BEGIN
-		//IF attribuut1 > atribuut2 THEN 
+		//IF attribuut1 > atribuut2 THEN
 	 		//Raise_Application_Error (-20343, Attribuut1 || ' mag niet groter zijn dan' || attribuut2);
 	        //ROLLBACK;
 		//END IF;
 	//END TupleCompareRule;
+
+
+	//voorbeeld
+
+
 
 	@Override
 	public String createBusinessRule() {
@@ -39,7 +44,7 @@ public class TupleCompareRule implements BusinessRuleStrategy {
 			        +"END IF;"
 				+"END" +ruleId;
 		return trigger;
-					
+
 	}
 
 }

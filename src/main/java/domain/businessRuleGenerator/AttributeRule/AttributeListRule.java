@@ -12,25 +12,26 @@ public class AttributeListRule implements BusinessRuleStrategy {
 	private Attribute attribute;
 	private List<String> values;
 	
+	//voorbeeld
+	//deze is getest
+
+	//ervoor nodig:
+	//trigger id
+	//entiteit 
+	//attribuut uit ddb
+	//costumValue lijst
 	
-	//create or replace trigger "id"
-	//AFTER insert or update 
-	//ON "table name"."attribute name"
+//	create or replace trigger ALIS
+	//    AFTER insert or update 
+	//    ON entiteit1 FOR EACH ROW
 	//DECLARE
-	//variable
+	//    custumAttribute varchar2(255) := :NEW.varcharAttribute;
 	//BEGIN 
-	//CASE variable
-		//WHEN "list value" THEN
-			//sql
-		//WHEN "list value" THEN
-			//sql
-		//WHEN "list value" THEN
-			//sql
-		//WHEN "list value" THEN
-			//sql
-		//else
-			//error
-	//end
+	//    IF custumAttribute not in ('almar', 'pascal', 'anka') THEN
+	//        Raise_Application_Error(-20343, 'deze is fout G');
+	//        ROLLBACK;
+	//    END IF;
+	//END ALIS;
 	
 	
 	@Override
