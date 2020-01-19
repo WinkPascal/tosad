@@ -4,13 +4,13 @@ import domain.businessRuleGenerator.BusinessRuleStrategy;
  
 public class AttributeRangeRule implements BusinessRuleStrategy{
 
-	private int ruleId;
+	private String ruleId;
 	private String entiteit;
 	private String minLimit;
 	private String maxLimit;
 	private String attribuut;
 	
-	public AttributeRangeRule(int ruleId, String entiteit, String minLimit, String maxLimit, String attribuut) {
+	public AttributeRangeRule(String ruleId, String entiteit, String minLimit, String maxLimit, String attribuut) {
 		this.ruleId = ruleId;
 		this.entiteit = entiteit;
 		this.minLimit = minLimit;
