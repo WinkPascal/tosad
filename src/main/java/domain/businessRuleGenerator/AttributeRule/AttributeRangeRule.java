@@ -1,40 +1,46 @@
 package domain.businessRuleGenerator.AttributeRule;
 
-import domain.BusinessRule.Attribute;
 import domain.businessRuleGenerator.BusinessRuleStrategy;
-
+ 
 public class AttributeRangeRule implements BusinessRuleStrategy{
 
 	private int ruleId;
-	private String operator;
-	private Attribute attribuut;
-	private String value1;
-	private String value2;
+	private String entiteit;
+	private String minLimit;
+	private String maxLimit;
+	private String attribuut;
 	
-	//vooorbeeld
-	
-//	create or replace trigger ARNG
-//	    AFTER insert or update 
-//	    ON entiteit1 FOR EACH ROW
-//	DECLARE
-//	    minLimit int := 5;
-//	    maxLimit int := 10;
-//	    custumAttribute int := :NEW.integerAttribute;
-//	BEGIN
-//	    if custumAttribute > maxLimit then
-//	         Raise_Application_Error (-20343, 'ARNG te groot');
-//	         ROLLBACK;
-//	    end if;
-//	    if custumAttribute < minLimit then
-//	         Raise_Application_Error (-20343, 'tARNG te klein .');
-//	         ROLLBACK;
-//	    end if;
-//	END ARNG;
-	
+	public AttributeRangeRule(int ruleId, String entiteit, String minLimit, String maxLimit, String attribuut) {
+		this.ruleId = ruleId;
+		this.entiteit = entiteit;
+		this.minLimit = minLimit;
+		this.maxLimit = maxLimit;
+		this.attribuut = attribuut;
+	}
+
 	@Override
 	public String createBusinessRule() {
-		// TODO Auto-generated method stub
-		return null;
+		String trigger =
+				"CREATE OR REPLACE trigger" + ruleId + "\n"
+					+"AFTER insert or update \n"
+					+"ON '"+entiteit+"' \n"
+				+"DECLARE \n"
+					+"minLimit int := "+minLimit+"; \n"
+					+"maxLimit int := "+maxLimit+"; \n"
+					+"custumAttribute int := :NEW."+attribuut+"; \n"
+				+"BEGIN \n"
+				+ "if custumAttribute > maxLimit then \n"
+					+ "Raise_Application_Error (-20343, 'ARNG te groot');"
+					+ "ROLLBACK; "
+				+ "END IF; "
+				+ "if custumAttribute < minLimit then \n "
+					+ "Raise_Application_Error (-20343, 'tARNG te klein .'); \n "
+					+ "ROLLBACK; \n"
+				+ "END IF; \n"
+				+ "END " + ruleId;
+		return trigger;
 	}
+
+
 
 }

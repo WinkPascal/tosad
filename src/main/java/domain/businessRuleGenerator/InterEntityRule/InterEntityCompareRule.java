@@ -4,41 +4,47 @@ import domain.businessRuleGenerator.BusinessRuleStrategy;
 
 public class InterEntityCompareRule implements BusinessRuleStrategy {
 
-	//new attribute
-	//entietit2
-	//foreign key
+	private String ruleId;
+	private String operator;
+	private String attribuut1;
+	private String attribute1ForeignKey;
+	private String entiteit;
 	
-	//entietit1
-	//pk
-	// compare attribute
+	private String compareAttribute;
+	private String compareAttributePrimaryKey;
+	
+	public InterEntityCompareRule(String ruleId, String operator, String attribuut1, String attribute1ForeignKey,
+			String entiteit, String compareAttribute, String compareAttributePrimaryKey) {
+		this.ruleId = ruleId;
+		this.operator = operator;
+		this.attribuut1 = attribuut1;
+		this.attribute1ForeignKey = attribute1ForeignKey;
+		this.entiteit = entiteit;
+		this.compareAttribute = compareAttribute;
+		this.compareAttributePrimaryKey = compareAttributePrimaryKey;
+	}
 
-
-	//note
-	//kan alleen voor een fk op een pk
-	
-//	
-//	create or replace trigger ICMP
-//	   AFTER insert or update 
-//	   ON entiteit2 FOR EACH ROW    
-//	DECLARE
-//	    newAttribute int := :NEW.integerAttribute;
-//	    newAttributeForeignKey int := :NEW.integerAttribute;
-//	    
-//	    compareAttribute int default 0;
-//	BEGIN
-//	    select decimalAttribute INTO compareAttribute
-//	    from entiteit1 
-//	    where INTEGERATTRIBUTE = newAttributeForeignKey;
-//
-//	    IF  newAttribute > compareAttribute THEN
-//	        Raise_Application_Error (-20343, 'ICMP newAttribute > compareAttribute');
-//	        ROLLBACK;
-//	    END IF;
-//	END ICMP;
-	
 	@Override
 	public String createBusinessRule() {
-		// TODO Auto-generated method stub
-		return null;
+		String trigger =
+				"CREATE OR REPLACE trigger" + ruleId + "\n"
+					+"AFTER insert or update \n"
+					+"ON '"+entiteit+"' \n"
+				+"DECLARE \n"
+					+"newAttribute int := :NEW."+attribuut1+" \n"
+					+"newAttributeForeignKey int := :NEW."+attribute1ForeignKey+" \n"
+					+"compareAttribute int; \n"
+				+ "BEGIN \n"
+					+ "select "+compareAttribute+" INTO compareAttribute \n"
+					+ "from "+entiteit+" \n"
+					+ "where "+compareAttributePrimaryKey+" = newAttributeForeignKey; \n"
+					+ "\n"
+					+ "IF  newAttribute "+operator+" compareAttribute THEN \n"
+						+ "Raise_Application_Error (-20343, 'ICMP newAttribute > compareAttribute'); \n"
+						+ "ROLLBACK; \n"
+					+ "END IF; \n"
+				+ "END "+ruleId;
+						
+		return trigger;
 	}
 }

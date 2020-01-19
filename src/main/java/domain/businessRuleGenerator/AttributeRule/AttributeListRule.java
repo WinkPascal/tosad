@@ -1,47 +1,48 @@
 package domain.businessRuleGenerator.AttributeRule;
 
 
-import java.util.List;
+import java.util.List; 
 
-import domain.BusinessRule.Attribute;
 import domain.businessRuleGenerator.BusinessRuleStrategy;
 
 public class AttributeListRule implements BusinessRuleStrategy {
 
-	private int id;
-	private Attribute attribute;
+	private String ruleId;
+	private String entiteit;
+	private String attribute;
 	private List<String> values;
-	
-	//voorbeeld
-	//deze is getest
 
-	//ervoor nodig:
-	//trigger id
-	//entiteit 
-	//attribuut uit ddb
-	//costumValue lijst
 	
-//	create or replace trigger ALIS
-	//    AFTER insert or update 
-	//    ON entiteit1 FOR EACH ROW
-	//DECLARE
-	//    custumAttribute varchar2(255) := :NEW.varcharAttribute;
-	//BEGIN 
-	//    IF custumAttribute not in ('almar', 'pascal', 'anka') THEN
-	//        Raise_Application_Error(-20343, 'deze is fout G');
-	//        ROLLBACK;
-	//    END IF;
-	//END ALIS;
-	
-	
-	@Override
-	public String createBusinessRule() {
-		String querie = "CREATE OR REPLACE TRIGGER "+id+ " \n"
-				+ "AFTER INSERT, UPDATE \n"
-				+ "ON "+attribute.getEntiteit +"."+attribute.getNaam()+" \n"
-				+ "DECLARE \n "
-				+ "attribute varchar2(255) new."+attribute.getNaam()+" \n"
-				+ "";
+	public AttributeListRule(String ruleId, String entiteit, String attribute, List<String> values) {
+		this.ruleId = ruleId;
+		this.entiteit = entiteit;
+		this.attribute = attribute;
+		this.values = values;
 	}
 
+	@Override
+	public String createBusinessRule() {
+		String querie = 
+				"CREATE OR REPLACE TRIGGER "+ruleId+ " \n"
+					+ "AFTER INSERT, UPDATE \n"
+					+ "ON "+entiteit+" \n"
+				+ "DECLARE \n "
+					+ "attribute varchar2(255) :NEW."+attribute+" \n"
+				+ "BEGIN \n"
+					+ "IF attribute NOT IN "+getList()+ " THEN \n"
+						+ "Raise_Application_Error(-20343, 'deze is fout G');"
+						+ "ROLLBACK \n"
+					+ "END IF;"
+				+ "END "+ruleId;
+		return querie;
+	}
+
+
+	private String getList() {
+		String list = "(";
+		for(String value : values) {
+			list = list + "'"+value+"', ";
+		}
+		return list.substring(0, list.length() - 2) + ")";
+	}
 }
