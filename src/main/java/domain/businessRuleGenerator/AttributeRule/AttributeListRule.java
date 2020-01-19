@@ -27,7 +27,8 @@ public class AttributeListRule implements BusinessRuleStrategy {
 					+ "AFTER INSERT, UPDATE \n"
 					+ "ON "+entiteit+" \n"
 				+ "DECLARE \n "
-					+ "attribute varchar2(255) :NEW."+attribute+" \n"
+				
+					+ "attribute " +entiteit+"."+attribute+"%type := :NEW."+attribute+" \n"
 				+ "BEGIN \n"
 					+ "IF attribute NOT IN "+getList()+ " THEN \n"
 						+ "Raise_Application_Error(-20343, 'deze is fout G');"

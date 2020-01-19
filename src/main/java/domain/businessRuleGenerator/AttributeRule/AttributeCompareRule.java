@@ -24,12 +24,12 @@ public class AttributeCompareRule implements BusinessRuleStrategy{
 				"CREATE OR REPLACE TRIGGER ACMP"+ruleId+ " \n"+
 					"BEFORE insert, update \n"+
 					"ON "+entiteit+" \n "+
-				"DECLARE \n" + 
+				"DECLARE \n" +
 					"value varchar2(255) := "+value+"; \n" +
-					"attribute varchar(255) := :NEW."+attribuut+" \n" +
+					"attribute"+ entiteit + "."+attribuut+"%type := :NEW."+attribuut+"; \n" +
 				"BEGIN \n" +
 					"IF attribute "+operator+" value THEN " +
-						"Raise_Application_Error (-20343, 'AttributeCompareRule')" +
+						"Raise_Application_Error (-20343, 'AttributeCompareRule');" +
 						"ROLLBACK; "+
 					"END IF;" + 
 				"END "+ruleId;	

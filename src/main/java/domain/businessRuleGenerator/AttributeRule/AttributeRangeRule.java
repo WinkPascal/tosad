@@ -27,7 +27,7 @@ public class AttributeRangeRule implements BusinessRuleStrategy{
 				+"DECLARE \n"
 					+"minLimit int := "+minLimit+"; \n"
 					+"maxLimit int := "+maxLimit+"; \n"
-					+"custumAttribute int := :NEW."+attribuut+"; \n"
+					+"custumAttribute"+entiteit+"."+attribuut+"%type:= :NEW."+attribuut+"; \n"
 				+"BEGIN \n"
 				+ "if custumAttribute > maxLimit then \n"
 					+ "Raise_Application_Error (-20343, 'ARNG te groot');"
