@@ -25,19 +25,16 @@
                 <RowConstraints maxHeight="277.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="278.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="278.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="278.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label text="Database" />
-                <Label text="Table 1" GridPane.rowIndex="1" />
+                <Label text="Table" GridPane.rowIndex="1" />
                 <Label text="Column 1" GridPane.rowIndex="2" />
                 <ComboBox prefHeight="27.0" prefWidth="328.0" GridPane.columnIndex="1" />
                 <ComboBox prefHeight="27.0" prefWidth="336.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <ComboBox prefHeight="27.0" prefWidth="349.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Table 2" GridPane.rowIndex="3" />
-            <Label text="Column 2" GridPane.rowIndex="4" />
-            <ComboBox prefHeight="27.0" prefWidth="393.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ComboBox prefHeight="27.0" prefWidth="302.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Column 2" GridPane.rowIndex="3" />
+            <ComboBox prefHeight="27.0" prefWidth="302.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
         </GridPane>
         <Label layoutX="14.0" layoutY="20.0" prefHeight="33.0" prefWidth="243.0" text="Tuple Compare rule" textFill="#00bbff">

@@ -19,8 +19,11 @@ public class MainItemsController {
     public void openNewAttributeOtherRule() throws IOException, ParseException{
         main.showNewAttributeOtherRule();
     }
-    public void openNewTupleCompareRUle() throws IOException, ParseException{
+    public void openNewTupleCompareRule() throws IOException, ParseException{
         main.showNewTupleCompareRule();
+    }
+    public void openNewInterEntityCompareRUle() throws IOException{
+        main.showNewInterEntityCompareRule();
     }
 
 

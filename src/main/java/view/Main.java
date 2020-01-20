@@ -87,6 +87,12 @@ public class Main extends Application {
         AnchorPane tupleCompareRule = loader.load();
         mainLayout.setCenter(tupleCompareRule);
     }
+    public void showNewInterEntityCompareRule() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("NewInterEntityCompareRule.fxml"));
+        AnchorPane interEntityCompareRule = loader.load();
+        mainLayout.setCenter(interEntityCompareRule);
+    }
 
 
 
