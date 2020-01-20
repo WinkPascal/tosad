@@ -23,8 +23,8 @@
 		
 		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.3.0</version>
+			<artifactId>ojdbc10</artifactId>
+			<version>19.3</version>
 		</dependency>
 
 		<!--&lt;!&ndash; https://mvnrepository.com/artifact/oracle/ojdbc6 &ndash;&gt; -->
