@@ -1,6 +1,8 @@
 package connection;
 
 // A Java program for a Client
+import definer.Rule;
+
 import java.net.*;
 import java.io.*;
 
@@ -12,7 +14,7 @@ public class Client
     private DataOutputStream out     = null;
 
     // constructor to put ip address and port
-    public Client(String address, int port)
+    public Client(String address, int port, Rule rule)
     {
         // establish a connection
         try

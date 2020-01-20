@@ -12,7 +12,8 @@ public class ErrorDaoImpl implements ErrorDao {
 			  String errors = errors.getError();
 			  
 			  myStmt.executeQuery("INSERT INTO error ruleCode, name, type, description");
-			 
+
+			  //TODO: Prepared statements
 			
 		}catch(Exception exc) {
 			exc.printStackTrace();
