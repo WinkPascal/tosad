@@ -20,7 +20,7 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>11</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc14</artifactId>

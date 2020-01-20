@@ -93,6 +93,12 @@ public class Main extends Application {
         AnchorPane interEntityCompareRule = loader.load();
         mainLayout.setCenter(interEntityCompareRule);
     }
+    public void showNewModifyRule() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("NewModifyRule.fxml"));
+        AnchorPane modifyRule = loader.load();
+        mainLayout.setCenter(modifyRule);
+    }
 
 
 

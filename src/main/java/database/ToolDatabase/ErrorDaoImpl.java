@@ -9,7 +9,7 @@ public class ErrorDaoImpl implements ErrorDao {
 		 Conncetion con = getConnection(); Statement stm =con.createStatement();
 			  String errors = errors.getError();
 			  
-			  myStmt.executeQuery("INSERT INTO error ruleCode, name, type, description")
+			  myStmt.executeQuery("INSERT INTO error ruleCode, name, type, description");
 			 
 			
 		}catch(Exception exc) {
