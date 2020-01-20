@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.AttributeListRuleController">
+<AnchorPane prefHeight="600" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AttributeListRuleController">
     <children>
         <Separator layoutX="381.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="20.0" />
         <GridPane layoutX="14.0" layoutY="66.0" prefHeight="130.0" prefWidth="360.0">
