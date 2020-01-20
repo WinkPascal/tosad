@@ -16,7 +16,7 @@ public class ToolDatabaseDaoImpl implements ToolDatabaseDao {
 	public void updateStatus(int id, String status) {
 		try {
 			Connection con = getConnection();
-			Stamtement stm = con.creatStatement();
+			Statement stm = con.createStatement();
 			
 			String status = rule.getStatus();
 			int id=  rule.getId();
