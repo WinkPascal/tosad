@@ -81,6 +81,12 @@ public class Main extends Application {
 
 
     }
+    public void showNewTupleCompareRule() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("NewTupleCompareRule.fxml"));
+        AnchorPane tupleCompareRule = loader.load();
+        mainLayout.setCenter(tupleCompareRule);
+    }
 
 
 
