@@ -2,7 +2,6 @@ module TOSAD {
     requires transitive javafx.controls;
     requires transitive javafx.fxml;
     requires json.simple;
-    requires mysql.connector.java;
 	requires java.sql;
 	requires ojdbc10;
     exports view;
