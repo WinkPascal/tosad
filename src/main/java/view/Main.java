@@ -1,8 +1,6 @@
 package view;
 
-import connection.Client;
-import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
-import database.ToolDatabase.OracleBaseDAO;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -60,7 +58,7 @@ public class Main extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("NewAttributeRangeRule.fxml"));
         AnchorPane attributeRangeRuleView = loader.load();
         mainLayout.setCenter(attributeRangeRuleView);
-        Client client = new Client("localhost", 5000);
+
 
     }
     public void showNewAttributeCompareRule() throws IOException{
@@ -108,10 +106,9 @@ public class Main extends Application {
 
 
 
+
     public static void main(String[] args) {
-   	 ToolDatabaseDaoOracleImpl tdb = new ToolDatabaseDaoOracleImpl();
-   	 tdb.addRule();
-    	launch(args);
+        launch(args);
     }
 
 
