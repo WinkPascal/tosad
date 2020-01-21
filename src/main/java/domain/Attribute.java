@@ -1,4 +1,4 @@
-package definer;
+package domain;
 
 public class Attribute {
 	private String name;
