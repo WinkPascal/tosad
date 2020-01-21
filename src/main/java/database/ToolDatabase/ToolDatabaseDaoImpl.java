@@ -1,5 +1,7 @@
 package database.ToolDatabase;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 
 import domain.BusinessRule.BusinessRule;
@@ -21,7 +23,9 @@ public class ToolDatabaseDaoImpl implements ToolDatabaseDao {
 			String status = rule.getStatus();
 			int id=  rule.getId();
 			
-			stm.executeQuery("UPDATE rule SET =  '" + status + "' WHERE id = " + id); 
+			stm.executeQuery("UPDATE rule SET =  '" + status + "' WHERE id = " + id);
+
+			/* TODO: Use prepared statements */
 		}catch(Exception exc){
 			exc.printStackTrace();	
 		}
