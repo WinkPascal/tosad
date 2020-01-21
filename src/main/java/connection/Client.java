@@ -1,9 +1,9 @@
 package connection;
 
-// A Java program for a Client
-import definer.Rule;
-
 import java.net.*;
+
+import domain.definer.Rule;
+
 import java.io.*;
 
 public class Client

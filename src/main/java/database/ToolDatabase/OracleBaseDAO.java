@@ -8,15 +8,16 @@ public class OracleBaseDAO {
 
 	public Connection getConnection() {
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			 Connection con = getConnection(); Statement stm =con.createStatement();
-				  String errors = errors.getError();
-				  
-				  myStmt.executeQuery("INSERT INTO error ruleCode, name, type, description")
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection myConn =  DriverManager.getConnection("jdbc:mysql://192.100.0.000:1521/ALMAR", "ALMAR", "admin");
 				 
-				
-			}catch(Exception exc) {
+			return myConn;
+			}catch(SQLException exc) {
 				exc.printStackTrace();
+				return null;}
+		catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
 			}
 	}
 }

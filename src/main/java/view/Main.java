@@ -1,6 +1,8 @@
 package view;
 
 import connection.Client;
+import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
+import database.ToolDatabase.OracleBaseDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -106,9 +108,10 @@ public class Main extends Application {
 
 
 
-
     public static void main(String[] args) {
-        launch(args);
+   	 ToolDatabaseDaoOracleImpl tdb = new ToolDatabaseDaoOracleImpl();
+   	 tdb.addRule();
+    	launch(args);
     }
 
 

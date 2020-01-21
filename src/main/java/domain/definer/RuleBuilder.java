@@ -1,4 +1,4 @@
-package definer;
+package domain.definer;
 
 import java.util.ArrayList;
 

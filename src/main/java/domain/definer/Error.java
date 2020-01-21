@@ -1,4 +1,4 @@
-package definer;
+package domain.definer;
 
 public class Error {
 	private Rule rule;
