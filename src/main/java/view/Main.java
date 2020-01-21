@@ -1,5 +1,6 @@
 package view;
 
+import connection.Client;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -57,6 +58,7 @@ public class Main extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("NewAttributeRangeRule.fxml"));
         AnchorPane attributeRangeRuleView = loader.load();
         mainLayout.setCenter(attributeRangeRuleView);
+        Client client = new Client("localhost", 5000);
 
     }
     public void showNewAttributeCompareRule() throws IOException{
@@ -92,6 +94,12 @@ public class Main extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("NewInterEntityCompareRule.fxml"));
         AnchorPane interEntityCompareRule = loader.load();
         mainLayout.setCenter(interEntityCompareRule);
+    }
+    public void showNewModifyRule() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("NewModifyRule.fxml"));
+        AnchorPane modifyRule = loader.load();
+        mainLayout.setCenter(modifyRule);
     }
 
 

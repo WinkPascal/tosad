@@ -11,8 +11,9 @@ public class ErrorDaoImpl implements ErrorDao {
 		 OracleConnection con = getConnection(); Statement stm =con.createStatement();
 			  String errors = errors.getError();
 			  
-			  myStmt.executeQuery("INSERT INTO error ruleCode, name, type, description")
-			 
+			  myStmt.executeQuery("INSERT INTO error ruleCode, name, type, description");
+
+			  //TODO: Prepared statements
 			
 		}catch(Exception exc) {
 			exc.printStackTrace();

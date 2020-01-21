@@ -22,8 +22,12 @@ public class MainItemsController {
     public void openNewTupleCompareRule() throws IOException, ParseException{
         main.showNewTupleCompareRule();
     }
-    public void openNewInterEntityCompareRUle() throws IOException{
+    public void openNewInterEntityCompareRule() throws IOException{
         main.showNewInterEntityCompareRule();
+    }
+    public void openNewModifyRule() throws IOException{
+        main.showNewModifyRule();
+
     }
 
 
