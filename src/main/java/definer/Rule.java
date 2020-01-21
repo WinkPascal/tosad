@@ -24,7 +24,7 @@ public class Rule {
 
 		
 	}
-	
+
 	public String toJSONString() {
 		JSONObject ruleJSONObject = new JSONObject();
 
