@@ -1,5 +1,6 @@
 package view;
 
+
 import domain.connection.Client;
 import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
 import database.ToolDatabase.OracleBaseDAO;
@@ -103,16 +104,7 @@ public class Main extends Application {
         mainLayout.setCenter(modifyRule);
     }
 
-
-
-
-
     public static void main(String[] args) {
-   	 ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
-   	 tdb.addRule("AAB", 2, 2, "<", "boi", "created");
-   	 System.out.println("added");
     	launch(args);
     }
-
-
 }

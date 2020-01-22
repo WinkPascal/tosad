@@ -1,14 +1,9 @@
 package domain.connection;
 
-import java.net.*;
-
-import domain.definer.Rule;
-=======
 // A Java program for a Client
 import java.net.*;
 
 import domain.businessRule.Rule;
->>>>>>> 90b69b1ef58e04b8d162025ae45b926317059794:src/main/java/domain/connection/Client.java
 
 import java.io.*;
 
@@ -20,7 +15,7 @@ public class Client
     private DataOutputStream out     = null;
 
     // constructor to put ip address and port
-    public Client(String address, int port, Rule rule)
+    public Client(String address, int port, TransportRule rule)
     {
         // establish a connection
         try

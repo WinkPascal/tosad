@@ -3,12 +3,11 @@ module TOSAD {
     requires transitive javafx.fxml;
     requires json.simple;
 	requires java.sql;
-	requires ojdbc10;
     exports view;
     exports controller;
-    exports domain.definer;
+    exports definer;
     opens view to javafx.base, javafx.fxml;
     opens controller to javafx.base , javafx.fxml;
-    opens domain.definer to json.simple;
+    opens definer to json.simple;
 
 }
