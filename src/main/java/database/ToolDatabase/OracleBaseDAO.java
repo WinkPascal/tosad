@@ -16,16 +16,19 @@ public class OracleBaseDAO {
 		
 	try {
 		Class.forName(DB_DRIV).newInstance();
-		System.out.println("yes");
+		Connection myConn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS); 
+		System.out.println("Connection established.");
+		return myConn;
 	} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 		e1.printStackTrace();
+		return null;
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return null;
 	}
-	Connection myConn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS); 
-	return myConn;
 }
 
 public static void closeConnection() throws SQLException {
 	conn.close();
 }
 	}
-}

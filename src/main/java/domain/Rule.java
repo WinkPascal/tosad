@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
+
 
 public class Rule {
 	public Rule(ArrayList<Attribute> attributes, String code, String description, String category, String status) {
@@ -19,11 +21,6 @@ public class Rule {
 	private String description;
 	private String category;
 	private String status;
-	
-	public void save() {
-
-		
-	}
 
 	public String toJSONString() {
 		JSONObject ruleJSONObject = new JSONObject();
