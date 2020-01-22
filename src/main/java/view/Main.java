@@ -1,6 +1,7 @@
 package view;
 
-
+import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
+import database.ToolDatabase.OracleBaseDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -58,8 +59,6 @@ public class Main extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("NewAttributeRangeRule.fxml"));
         AnchorPane attributeRangeRuleView = loader.load();
         mainLayout.setCenter(attributeRangeRuleView);
-
-
     }
     public void showNewAttributeCompareRule() throws IOException{
         FXMLLoader loader = new FXMLLoader();
@@ -102,14 +101,7 @@ public class Main extends Application {
         mainLayout.setCenter(modifyRule);
     }
 
-
-
-
-
-
     public static void main(String[] args) {
-        launch(args);
+    	launch(args);
     }
-
-
 }

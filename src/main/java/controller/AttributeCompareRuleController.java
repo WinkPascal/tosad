@@ -11,10 +11,26 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import domain.businessRule.Facade;
+import domain.businessRule.FacadeInterface;
+import domain.businessRule.Table;
+import javafx.fxml.Initializable;
 
 public class AttributeCompareRuleController implements Initializable {
 
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+		FacadeInterface facade = new Facade();
+		List<Table> tables = facade.getTables();
+		for (Table table : tables) {
+			table.getName();
+			// als de table is gekozen kunnen de column worden opgehaalt
+			for (String columnaam : table.getColumns()) {
+				System.out.println(columnaam);
+			}
 
 
     @FXML public ComboBox<String> dataBaseCombo = new ComboBox();
