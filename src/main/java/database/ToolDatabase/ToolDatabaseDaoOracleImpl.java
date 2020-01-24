@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.definer.Attribute;
 import domain.definer.Rule;
 
 public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolDatabaseDao {
@@ -100,11 +101,59 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 		}
 		
 	}
+	
+	private ArrayList<Attribute> getAttributesByRule(int ruleId) {
+		 ArrayList<Attribute> attributes = new ArrayList<Attribute>();
+		try {
+			Connection myConn = super.getConnection();
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery("SELECT * FROM ATTRIBUTE WHERE ruleId = "+ruleId);
+			while(rs.next()) {
+				attributes.add(new Attribute(rs.getString(3), rs.getString(4), rs.getString(5), Integer.parseInt(rs.getString(1))));
+			}
+		}catch(Exception exc){
+			exc.printStackTrace();
+		}
+		 return attributes;
+	}
 
 	@Override
 	public ArrayList<Rule> getAllRules() {
+		try {
+			ArrayList<Rule> ruleList = new ArrayList<Rule>();
+			
 			Connection myConn = super.getConnection();
-		return null;
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery("SELECT * FROM RULE");
+			
+			while (rs.next()) {
+		        int i = 1;
+		        
+		        List<String> tempList = new ArrayList<String>();
+		        
+		        while(i <= 7) {
+		            tempList.add(rs.getString(i));
+		            if (i == 7) {
+		            	ruleList.add(new Rule(this.getAttributesByRule(Integer.parseInt(tempList.get(0))), 
+		            			tempList.get(1), 
+		            			tempList.get(4), 
+		            			Integer.parseInt(tempList.get(3)), 
+		            			Integer.parseInt(tempList.get(2)), 
+		            			tempList.get(6), tempList.get(5), 
+		            			Integer.parseInt(tempList.get(0))));
+		            }
+		            i++;
+		        }
+			}
+			
+			
+			myConn.close();
+			return ruleList;
+			
+		}catch(SQLException exc){
+			exc.printStackTrace();	
+			return null;
+		}
 	}
 
 }

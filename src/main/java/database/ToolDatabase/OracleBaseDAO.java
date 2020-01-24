@@ -16,8 +16,7 @@ public class OracleBaseDAO {
 		
 	try {
 		Class.forName(DB_DRIV).newInstance();
-		Connection myConn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS); 
-		System.out.println("Connection established.");
+		Connection myConn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 		return myConn;
 	} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 		e1.printStackTrace();

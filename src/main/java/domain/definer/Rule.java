@@ -7,6 +7,17 @@ import org.json.simple.JSONObject;
 
 
 public class Rule {
+	
+	private ArrayList<Attribute> attributes;
+	private String code;
+	private String description;
+	private int categoryId;
+	private int typeId;
+	private String operator;
+	private String status;
+	private int dbId;
+	
+	
 	public Rule(ArrayList<Attribute> attributes, String code, String description, int categoryId, int typeId, String operator, String status) {
 		this.attributes = attributes;
 		this.code = code;
@@ -16,15 +27,17 @@ public class Rule {
 		this.operator = operator;
 		this.status = status;
 	}
-
-	private ArrayList<Attribute> attributes;
-	private String code;
-	private String description;
-	private int categoryId;
-	private int typeId;
-	private String operator;
-	private String status;
-	private int dbId;
+	
+	public Rule(ArrayList<Attribute> attributes, String code, String description, int categoryId, int typeId, String operator, String status, int dbId) {
+		this.attributes = attributes;
+		this.code = code;
+		this.description = description;
+		this.categoryId = categoryId;
+		this.typeId = typeId;
+		this.operator = operator;
+		this.status = status;
+		this.dbId = dbId;
+	}
 	
 	public void save() {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
@@ -74,5 +87,9 @@ public class Rule {
 
 
 
+	}
+	
+	public String toString() {
+		return "("+attributes +", "+ code +", "+ description +", "+ typeId +", "+ categoryId +", "+ operator +", "+ status +", "+ dbId+")";
 	}
 }
