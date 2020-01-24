@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+
+import domain.definer.Rule;
 
 public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolDatabaseDao {
 	
@@ -80,7 +83,7 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 	
 	
 	@Override
-	public void addAttribute(int ruleId, String name, String value) {
+	public void addAttribute(int ruleId, String name, String value, String entity) {
 		try {
 			Connection myConn = super.getConnection();
 			System.out.println("Connection returned.");
@@ -88,7 +91,7 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 			Statement stm = myConn.createStatement();
 			System.out.println("Statement created.");
 			
-			stm.executeQuery("INSERT INTO ATTRIBUTE(ruleId, name, value) VALUES ("+ruleId+", \'"+name+"\', \'"+value+"\')");
+			stm.executeQuery("INSERT INTO ATTRIBUTE(ruleId, name, value, entity) VALUES ("+ruleId+", \'"+name+"\', \'"+value+"\', \'"+entity+"\')");
 			System.out.println("Attribute inserted.");
 			
 			myConn.close();
@@ -96,6 +99,12 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 			exc.printStackTrace();	
 		}
 		
+	}
+
+	@Override
+	public ArrayList<Rule> getAllRules() {
+			Connection myConn = super.getConnection();
+		return null;
 	}
 
 }
