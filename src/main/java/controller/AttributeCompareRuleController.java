@@ -6,9 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.List;
@@ -21,17 +19,14 @@ import javafx.fxml.Initializable;
 
 public class AttributeCompareRuleController implements Initializable {
 
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-		FacadeInterface facade = new Facade();
-		List<Table> tables = facade.getTables();
-		for (Table table : tables) {
-			table.getName();
-			// als de table is gekozen kunnen de column worden opgehaalt
-			for (String columnaam : table.getColumns()) {
-				System.out.println(columnaam);
-			}
+    private static final AttributeCompareRuleController INSTANCE = new AttributeCompareRuleController();
 
+    public static AttributeCompareRuleController getInstance(){
+        if(INSTANCE == null){
+            return new AttributeCompareRuleController();
+        }
+        return INSTANCE;
+    }
 
     @FXML public ComboBox<String> dataBaseCombo = new ComboBox();
     @FXML public ComboBox<String> tableCombo = new ComboBox<>();
@@ -44,12 +39,41 @@ public class AttributeCompareRuleController implements Initializable {
     @FXML public Button setButton;
     @FXML public Button cancelButton;
 
+    @FXML public TextArea previewArea;
 
 
-    public void generate(){
-        TransportRule transportRule = new TransportRule("CREATE", 1);
-        new Client("localhost",5000,transportRule);
+
+    public void generate() throws InterruptedException {
+        if( dataBaseCombo.getValue() == null ||
+            tableCombo.getValue() == null ||
+            columnCombo.getValue() == null ||
+            operatorCombo.getValue() == null ||
+            dataBaseCombo.getValue().trim().isEmpty() ||
+            tableCombo.getValue().trim().isEmpty() ||
+            columnCombo.getValue().trim().isEmpty() ||
+            operatorCombo.getValue().trim().isEmpty()
+         ) {
+
+            showAlert();
+
+        }
+        else {
+
+            TransportRule transportRule = new TransportRule(tableCombo.getValue(), 1,Integer.parseInt(valueTextField.getText()), columnCombo.getValue(), operatorCombo.getValue());
+            new Client("localhost",5000,transportRule,INSTANCE);
+
+        }
     }
+    public void showAlert(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText(null);
+        alert.setContentText("Vul alle velden in!");
+
+
+        alert.showAndWait();
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,6 +81,16 @@ public class AttributeCompareRuleController implements Initializable {
         tableCombo.getItems().setAll("Generic_Table");
         columnCombo.getItems().setAll("Generic_Column");
         operatorCombo.getItems().setAll("<",">","==","!=");
+
+//        FacadeInterface facade = new Facade();
+//        List<Table> tables = facade.getTables();
+//        for (Table table : tables) {
+//            table.getName();
+//            // als de table is gekozen kunnen de column worden opgehaalt
+//            for (String columnaam : table.getColumns()) {
+//                System.out.println(columnaam);
+//            }
+//        }
 
 
     }
