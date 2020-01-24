@@ -29,8 +29,17 @@ public class Rule {
 	public void save() {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
 		dbId = tdb.addRule(this.code, this.typeId, this.categoryId, this.operator, this.description, this.status);
+		int i;
+		int length = attributes.size();
+		for(i = 0; i<length;i++) {
+			Attribute currentAttribute = attributes.get(i);
+			currentAttribute.save(dbId);
+		}
 		
-		
+	}
+	
+	public void addAttribute(Attribute attr) {
+		attributes.add(attr);
 	}
 	
 	public String toJSONString() {

@@ -26,7 +26,7 @@ public class Attribute {
 	
 	public void save(int ruleId) {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
-		tdb.addAttribute(ruleId, name, value);
+		tdb.addAttribute(ruleId, name, value, entity);
 	}
 }
 
