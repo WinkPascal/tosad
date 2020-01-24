@@ -34,7 +34,5 @@ public class RuleBuilder {
         return this;
     }
 
-    public Rule createRule() {
-        return new Rule(attributes, code, description, category, status);
-    }
+
 }

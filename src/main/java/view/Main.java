@@ -1,6 +1,7 @@
 package view;
 
 
+import controller.AttributeCompareRuleController;
 import domain.connection.Client;
 import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
 import database.ToolDatabase.OracleBaseDAO;
@@ -68,6 +69,7 @@ public class Main extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("NewAttributeCompareRule.fxml"));
         AnchorPane attributeCompareRule = loader.load();
         mainLayout.setCenter(attributeCompareRule);
+
 
     }
     public void showNewAttributeListRule() throws IOException{

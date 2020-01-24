@@ -1,13 +1,16 @@
 module TOSAD {
     requires transitive javafx.controls;
     requires transitive javafx.fxml;
+    requires transitive java.sql;
     requires json.simple;
-	requires java.sql;
+    requires ojdbc10;
     exports view;
     exports controller;
-    exports definer;
+    exports domain.definer;
+    exports database.ToolDatabase;
     opens view to javafx.base, javafx.fxml;
     opens controller to javafx.base , javafx.fxml;
-    opens definer to json.simple;
+    opens domain.definer to json.simple;
+    opens database.ToolDatabase to java.sql;
 
 }

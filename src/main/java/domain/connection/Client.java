@@ -1,71 +1,77 @@
 package domain.connection;
 
 // A Java program for a Client
+
+import controller.AttributeCompareRuleController;
 import java.net.*;
-
-import domain.businessRule.Rule;
-
 import java.io.*;
 
-public class Client
-{
-    // initialize socket and input output streams
-    private Socket socket            = null;
-    private DataInputStream  input   = null;
-    private DataOutputStream out     = null;
 
-    // constructor to put ip address and port
-    public Client(String address, int port, TransportRule rule)
-    {
-        // establish a connection
-        try
-        {
+
+public class Client {
+
+
+    private Socket socket = null;
+    private AttributeCompareRuleController attributeCompareRuleController = AttributeCompareRuleController.getInstance();
+
+
+
+
+    public Client(String address, int port, TransportRule transportRule, AttributeCompareRuleController attributeCompareRuleController) throws NullPointerException {
+        this.attributeCompareRuleController = attributeCompareRuleController;
+        try {
             socket = new Socket(address, port);
             System.out.println("Connected");
 
-            // takes input from terminal
-            input  = new DataInputStream(System.in);
 
-            // sends output to the socket
-            out    = new DataOutputStream(socket.getOutputStream());
-        }
-        catch(UnknownHostException u)
-        {
+        } catch (IOException u) {
             System.out.println(u);
         }
-        catch(IOException i)
-        {
-            System.out.println(i);
-        }
 
-        // string to read message from input
+        String lineIn =null;
         String line = "";
 
-        // keep reading until "Over" is input
-        while (!line.equals("*STOP*"))
-        {
-            try
-            {
-                line = input.readLine();
-                out.writeUTF(line);
-            }
-            catch(IOException i)
-            {
-                System.out.println(i);
-            }
-        }
 
-        // close the connection
-        try
-        {
-            input.close();
-            out.close();
-            socket.close();
-        }
-        catch(IOException i)
-        {
+
+        try {
+
+
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+            DataInputStream in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+
+            line = transportRule.toJSONString();
+            out.writeUTF(line);
+            StringBuilder ruleBuilder = new StringBuilder();
+
+
+            while((lineIn = in.readLine()) != null){
+                ruleBuilder.append(lineIn + "\n");
+            }
+
+            try {
+                in.close();
+                out.close();
+                socket.close();
+                System.out.println("closing connection");
+                String test = ruleBuilder.toString().substring(1);
+                System.out.println(test);
+                attributeCompareRuleController.showAlert();
+
+
+
+
+
+            } catch (IOException | NullPointerException e) {
+                e.printStackTrace();
+            }
+
+
+        } catch (IOException i) {
             System.out.println(i);
         }
+
+
+
     }
 
 
