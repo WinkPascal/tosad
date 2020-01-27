@@ -8,9 +8,9 @@ public class OracleBaseDAO {
 
 	protected static Connection conn;
 	private static final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
-	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/XEPDB1";
-	private static final String DB_USER = "ALMAR";
-	private static final String DB_PASS = "admin";
+	private static final String DB_URL = "jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC22";
+	private static final String DB_USER = "TOSAD";
+	private static final String DB_PASS = "TOSAD";
 
 	public Connection getConnection() {
 		
