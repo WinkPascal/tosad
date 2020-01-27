@@ -1,20 +1,22 @@
 package domain.definer;
 
+import java.util.ArrayList;
+
 import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
 
 public class Attribute {
 	private String name;
-	private String value;
+	private ArrayList<String> value;
 	private String entity;
 	private int dbId;
 	
-	public Attribute(String name, String value, String entity) {
+	public Attribute(String name, ArrayList<String> value, String entity) {
 		this.name = name;
 		this.value = value;
 		this.entity = entity;
 	}
 	
-	public Attribute(String name, String value, String entity, int dbId) {
+	public Attribute(String name, ArrayList<String> value, String entity, int dbId) {
 		this.name = name;
 		this.value = value;
 		this.entity = entity;
@@ -25,7 +27,7 @@ public class Attribute {
 		return name;
 	}
 
-	public String getValue() {
+	public ArrayList<String> getValue() {
 		return value;
 	}
 	
@@ -39,7 +41,13 @@ public class Attribute {
 	}
 	
 	public String toString() {
-		return name;
+		String str = name + "[";
+		int i;
+		for(i = 1; i <= value.size(); i++) {
+			str = str + value.get(i-1);
+		}
+		str = str + "]";
+		return str;
 	}
 }
 

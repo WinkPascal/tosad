@@ -41,19 +41,19 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 	}
 
 	@Override
-	public int addRule(String code, int typeId, int categoryId, String operator, String description, String status) {
+	public int addRule(String code, String SQLCode, int categoryId, String operator, String description, String status) {
 		try {
 			
 			int newId = 0;
 			Connection myConn = super.getConnection();
-			String SQL_INSERT = "INSERT INTO RULE(code, typeId, categoryId, operator, description, status) VALUES (?, ?, ?, ?, ?, ?)";
+			String SQL_INSERT = "INSERT INTO RULE(code, !!DOESNTWORKYET!!, categoryId, operator, description, status) VALUES (?, ?, ?, ?, ?, ?)";
 			String SQL_CURRVAL = "SELECT RULE_AUTO_INCREMENT_SEQ.CURRVAL FROM dual";
 
 
 			myConn.setAutoCommit(false);
 			PreparedStatement stm = myConn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
 			stm.setString(1, code);
-			stm.setLong(2, typeId);
+			stm.setString(2, SQLCode);
 			stm.setLong(3, categoryId);
 			stm.setString(4, operator);
 			stm.setString(5, description);
@@ -84,7 +84,7 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 	
 	
 	@Override
-	public void addAttribute(int ruleId, String name, String value, String entity) {
+	public void addAttribute(int ruleId, String name, ArrayList<String> value, String entity) {
 		try {
 			Connection myConn = super.getConnection();
 			System.out.println("Connection returned.");
@@ -102,19 +102,37 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 		
 	}
 	
-	private ArrayList<Attribute> getAttributesByRule(int ruleId) {
+	public ArrayList<Attribute> getAttributesByRule(int ruleId) {
 		 ArrayList<Attribute> attributes = new ArrayList<Attribute>();
 		try {
 			Connection myConn = super.getConnection();
 			Statement stm = myConn.createStatement();
 			ResultSet rs = stm.executeQuery("SELECT * FROM ATTRIBUTE WHERE ruleId = "+ruleId);
 			while(rs.next()) {
-				attributes.add(new Attribute(rs.getString(3), rs.getString(4), rs.getString(5), Integer.parseInt(rs.getString(1))));
+				ArrayList<String> values = new ArrayList<String>();
+				int attId = Integer.parseInt(rs.getString(1));
+				values = this.getValuesByAttribute(attId);
+				attributes.add(new Attribute(rs.getString(3), values, rs.getString(4), attId));
 			}
 		}catch(Exception exc){
 			exc.printStackTrace();
 		}
 		 return attributes;
+	}
+	
+	public ArrayList<String> getValuesByAttribute(int attributeId) {
+		ArrayList<String> values = new ArrayList<String>();
+		try {
+			Connection myConn = super.getConnection();
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery("SELECT value FROM VALUE WHERE attributeId = "+attributeId);
+			while(rs.next()) {
+				values.add(rs.getString(1));
+			}
+		}catch(Exception exc){
+			exc.printStackTrace();
+		}
+		 return values;
 	}
 
 	@Override
@@ -138,7 +156,7 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 		            			tempList.get(1), 
 		            			tempList.get(4), 
 		            			Integer.parseInt(tempList.get(3)), 
-		            			Integer.parseInt(tempList.get(2)), 
+		            			tempList.get(2), 
 		            			tempList.get(6), tempList.get(5), 
 		            			Integer.parseInt(tempList.get(0))));
 		            }

@@ -12,28 +12,28 @@ public class Rule {
 	private String code;
 	private String description;
 	private int categoryId;
-	private int typeId;
+	private String SQLCode;
 	private String operator;
 	private String status;
 	private int dbId;
 	
 	
-	public Rule(ArrayList<Attribute> attributes, String code, String description, int categoryId, int typeId, String operator, String status) {
+	public Rule(ArrayList<Attribute> attributes, String code, String description, int categoryId, String SQLCode, String operator, String status) {
 		this.attributes = attributes;
 		this.code = code;
 		this.description = description;
 		this.categoryId = categoryId;
-		this.typeId = typeId;
+		this.SQLCode = SQLCode;
 		this.operator = operator;
 		this.status = status;
 	}
 	
-	public Rule(ArrayList<Attribute> attributes, String code, String description, int categoryId, int typeId, String operator, String status, int dbId) {
+	public Rule(ArrayList<Attribute> attributes, String code, String description, int categoryId, String SQLCode, String operator, String status, int dbId) {
 		this.attributes = attributes;
 		this.code = code;
 		this.description = description;
 		this.categoryId = categoryId;
-		this.typeId = typeId;
+		this.SQLCode = SQLCode;
 		this.operator = operator;
 		this.status = status;
 		this.dbId = dbId;
@@ -41,7 +41,7 @@ public class Rule {
 	
 	public void save() {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
-		dbId = tdb.addRule(this.code, this.typeId, this.categoryId, this.operator, this.description, this.status);
+		dbId = tdb.addRule(this.code, this.SQLCode, this.categoryId, this.operator, this.description, this.status);
 		int i;
 		int length = attributes.size();
 		for(i = 0; i<length;i++) {
@@ -90,6 +90,6 @@ public class Rule {
 	}
 	
 	public String toString() {
-		return "("+attributes +", "+ code +", "+ description +", "+ typeId +", "+ categoryId +", "+ operator +", "+ status +", "+ dbId+")";
+		return "("+attributes +", "+ code +", "+ description +", "+ SQLCode +", "+ categoryId +", "+ operator +", "+ status +", "+ dbId+")";
 	}
 }
