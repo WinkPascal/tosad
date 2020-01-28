@@ -58,4 +58,42 @@ public class TargetDatabaseDAOOracleImpl extends OracleBaseDAO implements Target
 		}
 	}
 
+	@Override
+	public ArrayList<String> getIntColumns(String tableName) {
+		try {
+			ArrayList<String> columnList = new ArrayList<String>();
+			Connection myConn = super.getConnectionManually("jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC22","TARGET", "TARGET");
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery("SELECT column_name	FROM USER_TAB_COLUMNS WHERE table_name = \'"+tableName+"\' AND DATA_TYPE = \'NUMBER\'");
+			
+			while(rs.next()) {
+				columnList.add(rs.getString(1));
+			}
+			
+			return columnList;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public ArrayList<String> getStringColumns(String tableName) {
+		try {
+			ArrayList<String> columnList = new ArrayList<String>();
+			Connection myConn = super.getConnectionManually("jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC22","TARGET", "TARGET");
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery("SELECT column_name	FROM USER_TAB_COLUMNS WHERE table_name = \'"+tableName+"\' AND (DATA_TYPE = \'VARCHAR\' OR DATA_TYPE = \'VARCHAR2\')");
+			
+			while(rs.next()) {
+				columnList.add(rs.getString(1));
+			}
+			
+			return columnList;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
