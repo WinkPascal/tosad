@@ -8,14 +8,14 @@ import org.json.simple.JSONObject;
 
 public class Rule {
 	
-	private ArrayList<Attribute> attributes;
-	private String code;
-	private String description;
-	private int categoryId;
-	private String SQLCode;
-	private String operator;
-	private String status;
-	private int dbId;
+	public ArrayList<Attribute> attributes;
+	public String code;
+	public String description;
+	public int categoryId;
+	public String SQLCode;
+	public String operator;
+	public String status;
+	public int dbId;
 	
 	
 	public Rule(ArrayList<Attribute> attributes, String code, String description, int categoryId, String SQLCode, String operator, String status) {
@@ -92,5 +92,37 @@ public class Rule {
 	
 	public String toString() {
 		return "("+attributes +", "+ code +", "+ description +", "+ SQLCode +", "+ categoryId +", "+ operator +", "+ status +", "+ dbId+")";
+	}
+
+	public ArrayList<Attribute> getAttributes() {
+		return attributes;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public String getSQLCode() {
+		return SQLCode;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public int getDbId() {
+		return dbId;
 	}
 }

@@ -76,8 +76,17 @@ public class AttributeCompareRuleController implements Initializable {
         TransportRule transportRule = new TransportRule(currentId, "set");
         new Client("localhost", 5000, transportRule, this);
         showAlert("Rule met id: " + currentId + " set in database" );
+        cancel();
 
     }
+    public void cancel(){
+        dataBaseCombo.getSelectionModel().clearSelection();
+        tableCombo.getSelectionModel().clearSelection();
+        columnCombo.getSelectionModel().clearSelection();
+        operatorCombo.getSelectionModel().clearSelection();
+        valueTextField.clear();
+    }
+
     public void showAlert(String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
@@ -111,6 +120,7 @@ public class AttributeCompareRuleController implements Initializable {
 //                System.out.println(columnaam);
 //            }
 //        }
+
     valueTextField.textProperty().addListener(new ChangeListener<String>() {
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

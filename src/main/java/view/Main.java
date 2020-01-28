@@ -4,6 +4,7 @@ package view;
 import domain.definer.Attribute;
 import domain.definer.Rule;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -103,6 +104,13 @@ public class Main extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("NewModifyRule.fxml"));
         AnchorPane modifyRule = loader.load();
         mainLayout.setCenter(modifyRule);
+    }
+    public void showAllRules() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("ViewRules.fxml"));
+        AnchorPane allRules = loader.load();
+        mainLayout.setCenter(allRules);
+
     }
 
     public static void main(String[] args) {
