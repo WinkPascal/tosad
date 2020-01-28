@@ -65,7 +65,7 @@
             </children>
         </GridPane>
         <Button fx:id="generateButton" onAction="#generate" layoutX="14.0" layoutY="538.0" mnemonicParsing="false" text="Generate" />
-        <Button fx:id="setButton" layoutX="161.0" layoutY="538.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Set" />
+        <Button fx:id="setButton" onAction="#set" layoutX="161.0" layoutY="538.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Set" />
         <Button fx:id="cancelButton" layoutX="317.0" layoutY="538.0" mnemonicParsing="false" text="Cancel" />
     </children>
     <opaqueInsets>

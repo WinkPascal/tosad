@@ -1,29 +1,23 @@
 package controller;
 
 import domain.connection.Client;
-import domain.connection.GeneratorClient;
 import domain.connection.TransportRule;
 import domain.definer.Attribute;
 import domain.definer.Rule;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import domain.businessRule.Facade;
-import domain.businessRule.FacadeInterface;
-import domain.businessRule.Table;
-import javafx.fxml.Initializable;
 
 public class AttributeCompareRuleController implements Initializable {
+
+    private int currentId = 0;
 
     private static final AttributeCompareRuleController INSTANCE = new AttributeCompareRuleController();
 
@@ -60,7 +54,7 @@ public class AttributeCompareRuleController implements Initializable {
             operatorCombo.getValue().trim().isEmpty()
          ) {
 
-            showAlert();
+            showAlert("Vul alle velden in!");
 
         }
         else {
@@ -68,19 +62,27 @@ public class AttributeCompareRuleController implements Initializable {
             ArrayList<Attribute> attributes = new ArrayList<>();
             values.add(valueTextField.getText());
             attributes.add((new Attribute(columnCombo.getValue(), values, tableCombo.getValue())));
-            Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 0, "", operatorCombo.getValue(), "GENERATED");
+            Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
             int ruleId = rule.save();
+            System.out.println(operatorCombo.getValue());
 
 
             TransportRule transportRule = new TransportRule(ruleId, "generate");
-            new GeneratorClient("localhost",5000,transportRule,this);
+            new Client("localhost",5000,transportRule,this);
+            currentId = ruleId;
         }
     }
-    public void showAlert(){
+    public void set(){
+        TransportRule transportRule = new TransportRule(currentId, "set");
+        new Client("localhost", 5000, transportRule, this);
+        showAlert("Rule met id: " + currentId + " set in database" );
+
+    }
+    public void showAlert(String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText(null);
-        alert.setContentText("Vul alle velden in!");
+        alert.setContentText(content);
 
 
         alert.showAndWait();
@@ -93,9 +95,12 @@ public class AttributeCompareRuleController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataBaseCombo.getItems().setAll("Generic_Database");
-        tableCombo.getItems().setAll("Generic_Table");
-        columnCombo.getItems().setAll("Generic_Column");
-        operatorCombo.getItems().setAll("<",">","==","!=");
+        tableCombo.getItems().setAll("PRODUCTEN");
+        columnCombo.getItems().setAll("ID");
+        operatorCombo.getItems().add("==");
+        operatorCombo.getItems().add("!=");
+        operatorCombo.getItems().add(">");
+        operatorCombo.getItems().add("<");
 
 //        FacadeInterface facade = new Facade();
 //        List<Table> tables = facade.getTables();

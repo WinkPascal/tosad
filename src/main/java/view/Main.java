@@ -1,12 +1,8 @@
 package view;
 
 
-import controller.AttributeCompareRuleController;
-import domain.connection.Client;
 import domain.definer.Attribute;
 import domain.definer.Rule;
-import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
-import database.ToolDatabase.OracleBaseDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
