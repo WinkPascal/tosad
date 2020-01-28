@@ -110,12 +110,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-    	ArrayList<Attribute> lst = new ArrayList<Attribute>();
-    	ArrayList<String> strLst = new ArrayList<String>();
-    	strLst.add("testValue");
-    	lst.add(new Attribute("testAttribute", strLst, "testTable"));
-    	Rule nwRl = new Rule(lst, "AAA", "testing123", 2, "GENERATED SQL CODE HERE", "=", "created");
-    	nwRl.save();
     	launch(args);
     }
 }
