@@ -22,16 +22,11 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
     }
 	
 	@Override
-	public void updateRuleById(int id, String code, int typeId, int categoryId, String operator, String description, String status) {
+	public void updateRuleById(int id, String code, String SQLCode, int categoryId, String operator, String description, String status) {
 		try {
 			Connection myConn = super.getConnection();
-			System.out.println("Connection returned.");
-			
-			Statement stm = myConn.createStatement();
-			System.out.println("Statement created.");
-			
-			stm.executeQuery("UPDATE RULE SET code = \'"+code+"\', typeId = "+typeId+", categoryId = "+categoryId+", operator = \'"+operator+"\' description = \'"+description+"\', status = \'"+status+"\' WHERE id = "+id);
-			System.out.println("Rule updated.");
+			Statement stm = myConn.createStatement();		
+			stm.executeQuery("UPDATE RULE SET code = \'"+code+"\', SQLCode = "+SQLCode+", categoryId = "+categoryId+", operator = \'"+operator+"\' description = \'"+description+"\', status = \'"+status+"\' WHERE id = "+id);
 			
 			myConn.close();
 		}catch(SQLException exc){
@@ -58,19 +53,15 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 			stm.setString(4, operator);
 			stm.setString(5, description);
 			stm.setString(6, status);
-			System.out.println("Statement prepared.");
 			
 			stm.executeUpdate();
-			System.out.println("Rule inserted.");
 			
 		    Statement currvalStatement = myConn.createStatement();
 		    ResultSet currvalResultSet = currvalStatement.executeQuery(SQL_CURRVAL);
-		    System.out.println("Curvall resultset retrieved.");
 		    
 		    
 		    if (currvalResultSet.next()) {
 		        newId = currvalResultSet.getInt(1);
-		        System.out.println("RuleId retrieved.");
 		    }
 		    myConn.commit();
 		    myConn.close();
