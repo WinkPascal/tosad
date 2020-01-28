@@ -39,7 +39,7 @@ public class Rule {
 		this.dbId = dbId;
 	}
 	
-	public void save() {
+	public int save() {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
 		dbId = tdb.addRule(this.code, this.SQLCode, this.categoryId, this.operator, this.description, this.status);
 		int i;
@@ -48,6 +48,7 @@ public class Rule {
 			Attribute currentAttribute = attributes.get(i);
 			currentAttribute.save(dbId);
 		}
+		return dbId;
 		
 	}
 	

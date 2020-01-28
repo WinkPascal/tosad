@@ -3,8 +3,6 @@ package view;
 
 import controller.AttributeCompareRuleController;
 import domain.connection.Client;
-import domain.definer.Attribute;
-import domain.definer.Rule;
 import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
 import database.ToolDatabase.OracleBaseDAO;
 import javafx.application.Application;
@@ -17,7 +15,6 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main extends Application {
     private Stage primaryStage;
@@ -110,12 +107,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-    	ArrayList<Attribute> lst = new ArrayList<Attribute>();
-    	ArrayList<String> strLst = new ArrayList<String>();
-    	strLst.add("testValue");
-    	lst.add(new Attribute("testAttribute", strLst, "testTable"));
-    	Rule nwRl = new Rule(lst, "AAA", "testing123", 2, "GENERATED SQL CODE HERE", "=", "created");
-    	nwRl.save();
+    	ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
     	launch(args);
     }
 }
