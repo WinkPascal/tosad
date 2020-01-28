@@ -40,7 +40,7 @@ public class TargetDatabaseDAOOracleImpl extends OracleBaseDAO implements Target
 	}
 
 	@Override
-	public ArrayList<String> getColumns(String tableName) {
+	public ArrayList<String> getAllColumns(String tableName) {
 		try {
 			ArrayList<String> columnList = new ArrayList<String>();
 			Connection myConn = super.getConnectionManually("jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC22","TARGET", "TARGET");
