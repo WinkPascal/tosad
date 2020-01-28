@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import database.ToolDatabase.OracleBaseDAO;
 import domain.definer.Attribute;
+import domain.definer.Relation;
 
 public class TargetDatabaseDAOOracleImpl extends OracleBaseDAO implements TargetDatabaseDAO{
 	
@@ -37,6 +38,31 @@ public class TargetDatabaseDAOOracleImpl extends OracleBaseDAO implements Target
 			return null;
 		}
 		
+	}
+	
+	@Override
+	public ArrayList<Relation> getRelationalTables() {
+		ArrayList<Relation> relationList = new ArrayList<Relation>();
+		try {
+			Connection myConn = super.getConnectionManually("jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC22","TARGET", "TARGET");
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery("SELECT distinct a.table_name, c_pk.table_name r_table_name "
+					+ "FROM all_cons_columns a "
+					+ "JOIN all_constraints c ON a.owner = c.owner "
+					+ "AND a.constraint_name = c.constraint_name "
+					+ "JOIN all_constraints c_pk ON c.r_owner = c_pk.owner "
+					+ "AND c.r_constraint_name = c_pk.constraint_name "
+					+ "WHERE c.constraint_type = 'R' "
+					+ "AND a.table_name in (SELECT TABLE_NAME FROM USER_TABLES)");
+			
+			while(rs.next()) {
+				relationList.add(new Relation(rs.getString(1), rs.getString(2)));
+			}
+			return relationList;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

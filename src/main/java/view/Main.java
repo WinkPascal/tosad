@@ -1,11 +1,8 @@
 package view;
 
 
-import domain.definer.Attribute;
-import domain.definer.Rule;
-import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
+import domain.definer.Relation;
 import database.TargetDatabase.TargetDatabaseDAOOracleImpl;
-import database.ToolDatabase.OracleBaseDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
