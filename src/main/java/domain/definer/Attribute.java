@@ -37,14 +37,24 @@ public class Attribute {
 	
 	public void save(int ruleId) {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
-		tdb.addAttribute(ruleId, name, value, entity);
+		int attributeId = tdb.addAttribute(ruleId, name, entity);
+		this.dbId = attributeId;
+		this.saveValues(attributeId);
+	}
+	
+	public void saveValues(int attributeId) {
+		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
+		int i;
+		for(i = 0; i < value.size(); i++) {
+			tdb.addValue(attributeId, value.get(i));
+		}
 	}
 	
 	public String toString() {
 		String str = name + "[";
 		int i;
-		for(i = 1; i <= value.size(); i++) {
-			str = str + value.get(i-1);
+		for(i = 0; i < value.size(); i++) {
+			str = str + value.get(i);
 		}
 		str = str + "]";
 		return str;

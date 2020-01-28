@@ -46,7 +46,7 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 			
 			int newId = 0;
 			Connection myConn = super.getConnection();
-			String SQL_INSERT = "INSERT INTO RULE(code, !!DOESNTWORKYET!!, categoryId, operator, description, status) VALUES (?, ?, ?, ?, ?, ?)";
+			String SQL_INSERT = "INSERT INTO RULE(code, sqlcode, categoryId, operator, description, status) VALUES (?, ?, ?, ?, ?, ?)";
 			String SQL_CURRVAL = "SELECT RULE_AUTO_INCREMENT_SEQ.CURRVAL FROM dual";
 
 
@@ -84,22 +84,52 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 	
 	
 	@Override
-	public void addAttribute(int ruleId, String name, ArrayList<String> value, String entity) {
+	public int addAttribute(int ruleId, String name, String entity) {
 		try {
+			int newId = 0;
 			Connection myConn = super.getConnection();
-			System.out.println("Connection returned.");
+			String SQL_INSERT = "INSERT INTO attribute(ruleId, name, entity) VALUES (?, ?, ?)";
+			String SQL_CURRVAL = "SELECT ATTRIBUTE_AUTO_INCREMENT_SEQ.CURRVAL FROM dual";
+
+
+			myConn.setAutoCommit(false);
+			PreparedStatement stm = myConn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+			stm.setLong(1, ruleId);
+			stm.setString(2, name);
+			stm.setString(3, entity);
 			
-			Statement stm = myConn.createStatement();
-			System.out.println("Statement created.");
+			stm.executeUpdate();
 			
-			stm.executeQuery("INSERT INTO ATTRIBUTE(ruleId, name, value, entity) VALUES ("+ruleId+", \'"+name+"\', \'"+value+"\', \'"+entity+"\')");
-			System.out.println("Attribute inserted.");
-			
-			myConn.close();
+		    Statement currvalStatement = myConn.createStatement();
+		    ResultSet currvalResultSet = currvalStatement.executeQuery(SQL_CURRVAL);
+		    
+		    if (currvalResultSet.next()) {
+		        newId = currvalResultSet.getInt(1);
+		    }
+		    myConn.commit();
+		    myConn.close();
+		    return newId;
+		    
 		}catch(SQLException exc){
-			exc.printStackTrace();	
+			exc.printStackTrace();
+			return 0;
 		}
 		
+	}
+	
+	@Override
+	public void addValue(int attributeId, String value) {
+		Connection myConn = super.getConnection();	
+		Statement stm;
+		try {
+			stm = myConn.createStatement();
+			stm.executeQuery("INSERT INTO VALUE(attributeId, value) VALUES ("+attributeId+", \'"+value+"\')");		
+			
+			myConn.close();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public ArrayList<Attribute> getAttributesByRule(int ruleId) {
@@ -154,10 +184,10 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 		            if (i == 7) {
 		            	ruleList.add(new Rule(this.getAttributesByRule(Integer.parseInt(tempList.get(0))), 
 		            			tempList.get(1), 
-		            			tempList.get(4), 
-		            			Integer.parseInt(tempList.get(3)), 
-		            			tempList.get(2), 
-		            			tempList.get(6), tempList.get(5), 
+		            			tempList.get(3), 
+		            			Integer.parseInt(tempList.get(2)), 
+		            			tempList.get(6), 
+		            			tempList.get(5), tempList.get(4), 
 		            			Integer.parseInt(tempList.get(0))));
 		            }
 		            i++;
