@@ -1,6 +1,8 @@
 package controller;
 
 import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
+import domain.connection.Client;
+import domain.connection.TransportRule;
 import domain.definer.Rule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewRulesController implements Initializable {
+public class ViewRulesController implements Initializable, Controller {
 
     ToolDatabaseDaoOracleImpl toolDatabaseDaoOracle = ToolDatabaseDaoOracleImpl.getInstance();
 
@@ -28,7 +30,13 @@ public class ViewRulesController implements Initializable {
     @FXML public TableColumn<Rule, Integer> databaseIdColumn;
     @FXML public TableColumn<Rule, Integer> statusColumn;
 
-    
+    public void update(){
+        new Client("localhost",5000, (
+                new TransportRule(ruleTableView.getSelectionModel().getSelectedItem().getDbId(),"update")),this);
+
+    }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -38,8 +46,8 @@ public class ViewRulesController implements Initializable {
         sqlCodeColumn.setCellValueFactory(new PropertyValueFactory<>("SQLCode"));
         databaseIdColumn.setCellValueFactory(new PropertyValueFactory<>("dbId"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-
         ruleTableView.setItems(ruleObservableList);
+
     }
 }
 

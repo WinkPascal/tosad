@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
-public class AttributeCompareRuleController implements Initializable {
+public class AttributeCompareRuleController implements Initializable, Controller {
 
     private int currentId = 0;
 
