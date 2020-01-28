@@ -1,5 +1,9 @@
 package controller;
 
+import database.TargetDatabase.TargetDatabaseDAO;
+import database.TargetDatabase.TargetDatabaseDAOOracleImpl;
+import database.ToolDatabase.ToolDatabaseDao;
+import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
 import domain.connection.Client;
 import domain.connection.TransportRule;
 import domain.definer.Attribute;
@@ -13,6 +17,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
 
 
 public class AttributeCompareRuleController implements Initializable {
@@ -64,8 +69,6 @@ public class AttributeCompareRuleController implements Initializable {
             attributes.add((new Attribute(columnCombo.getValue(), values, tableCombo.getValue())));
             Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
             int ruleId = rule.save();
-            System.out.println(operatorCombo.getValue());
-
 
             TransportRule transportRule = new TransportRule(ruleId, "generate");
             new Client("localhost",5000,transportRule,this);
@@ -95,31 +98,31 @@ public class AttributeCompareRuleController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataBaseCombo.getItems().setAll("Generic_Database");
-        tableCombo.getItems().setAll("PRODUCTEN");
-        columnCombo.getItems().setAll("ID");
+
+        TargetDatabaseDAO targetDatabase =  TargetDatabaseDAOOracleImpl.getInstance();
+
+        tableCombo.getItems().setAll(targetDatabase.getTables());
+
+        tableCombo.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue ov, String t, String t1) {
+                columnCombo.getItems().setAll(targetDatabase.getAllColumns(tableCombo.getValue()));
+            }
+        });
+
+        //operators
         operatorCombo.getItems().add("==");
         operatorCombo.getItems().add("!=");
         operatorCombo.getItems().add(">");
         operatorCombo.getItems().add("<");
 
-//        FacadeInterface facade = new Facade();
-//        List<Table> tables = facade.getTables();
-//        for (Table table : tables) {
-//            table.getName();
-//            // als de table is gekozen kunnen de column worden opgehaalt
-//            for (String columnaam : table.getColumns()) {
-//                System.out.println(columnaam);
-//            }
-//        }
-    valueTextField.textProperty().addListener(new ChangeListener<String>() {
-        @Override
-        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            if (!newValue.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
-                valueTextField.setText(oldValue);
+        valueTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
+                    valueTextField.setText(oldValue);
+                }
             }
-        }
-    });
-
-
+        });
     }
 }
