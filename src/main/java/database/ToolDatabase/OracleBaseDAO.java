@@ -26,6 +26,20 @@ public class OracleBaseDAO {
 		return null;
 	}
 }
+	
+	public Connection getConnectionManually(String url, String user, String pass) {
+		try {
+			Class.forName(DB_DRIV).newInstance();
+			Connection myConn = DriverManager.getConnection(url, user, pass);
+			return myConn;
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+			e1.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 public static void closeConnection() throws SQLException {
 	conn.close();
