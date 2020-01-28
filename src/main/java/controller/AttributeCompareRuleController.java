@@ -1,7 +1,12 @@
 package controller;
 
 import domain.connection.Client;
+import domain.connection.GeneratorClient;
 import domain.connection.TransportRule;
+import domain.definer.Attribute;
+import domain.definer.Rule;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -58,10 +64,16 @@ public class AttributeCompareRuleController implements Initializable {
 
         }
         else {
+            ArrayList<String> values = new ArrayList<>();
+            ArrayList<Attribute> attributes = new ArrayList<>();
+            values.add(valueTextField.getText());
+            attributes.add((new Attribute(columnCombo.getValue(), values, tableCombo.getValue())));
+            Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 0, "", operatorCombo.getValue(), "GENERATED");
+            int ruleId = rule.save();
 
-            TransportRule transportRule = new TransportRule(tableCombo.getValue(), 1,Integer.parseInt(valueTextField.getText()), columnCombo.getValue(), operatorCombo.getValue());
-            new Client("localhost",5000,transportRule,INSTANCE);
 
+            TransportRule transportRule = new TransportRule(ruleId, "generate");
+            new GeneratorClient("localhost",5000,transportRule,this);
         }
     }
     public void showAlert(){
@@ -74,6 +86,9 @@ public class AttributeCompareRuleController implements Initializable {
         alert.showAndWait();
     }
 
+    public void setGeneratedPreviewArea(String preview){
+        previewArea.setText(preview);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -91,6 +106,14 @@ public class AttributeCompareRuleController implements Initializable {
 //                System.out.println(columnaam);
 //            }
 //        }
+    valueTextField.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            if (!newValue.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
+                valueTextField.setText(oldValue);
+            }
+        }
+    });
 
 
     }
