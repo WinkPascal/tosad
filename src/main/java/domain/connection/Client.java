@@ -1,6 +1,8 @@
 package domain.connection;
 
 import controller.AttributeCompareRuleController;
+import controller.Controller;
+import controller.ViewRulesController;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -13,11 +15,10 @@ import java.net.Socket;
 
 public class Client {
 
-    private AttributeCompareRuleController attributeCompareRuleController = AttributeCompareRuleController.getInstance();
+
     private Socket socket = null;
 
-    public Client(String address, int port, TransportRule transportRule, AttributeCompareRuleController attributeCompareRuleController)  throws NullPointerException {
-        this.attributeCompareRuleController = attributeCompareRuleController;
+    public Client(String address, int port, TransportRule transportRule, Controller controller)  throws NullPointerException {
         try {
             socket = new Socket(address, port);
             System.out.println("Connected");
@@ -54,7 +55,14 @@ public class Client {
                 System.out.println("closing connection");
                 String test = ruleBuilder.toString();
                 System.out.println(test);
-                attributeCompareRuleController.setGeneratedPreviewArea(test);
+                if(controller instanceof AttributeCompareRuleController) {
+                    AttributeCompareRuleController attributeCompareRuleController = (AttributeCompareRuleController) controller;
+                    attributeCompareRuleController.setGeneratedPreviewArea(test);
+                }
+                if(controller instanceof ViewRulesController){
+                    ViewRulesController viewRulesController = (ViewRulesController) controller;
+
+                }
 
 
 

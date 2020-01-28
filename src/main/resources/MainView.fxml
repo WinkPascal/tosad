@@ -23,7 +23,7 @@
                </items></Menu>
           <Menu mnemonicParsing="false" text="View">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Business Rules" />
+                  <MenuItem onAction="#openAllRules" mnemonicParsing="false" text="Business Rules" />
                </items></Menu>
           <Menu mnemonicParsing="false" text="Select">
                <items>

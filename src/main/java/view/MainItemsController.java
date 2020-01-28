@@ -29,6 +29,9 @@ public class MainItemsController {
         main.showNewModifyRule();
 
     }
+    public void openAllRules() throws IOException{
+        main.showAllRules();
+    }
 
 
     }

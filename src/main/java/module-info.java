@@ -10,7 +10,8 @@ module TOSAD {
     exports database.ToolDatabase;
     opens view to javafx.base, javafx.fxml;
     opens controller to javafx.base , javafx.fxml;
-    opens domain.definer to json.simple;
+    opens domain.definer to json.simple, javafx.fxml, javafx.base, javafx.controls, javafx.graphics;
     opens database.ToolDatabase to java.sql;
+
 
 }
