@@ -22,17 +22,21 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
     }
 	
 	@Override
-	public void updateRuleById(int id, String code, String SQLCode, int categoryId, String operator, String description, String status) {
+	public void updateRuleById(int id, String operator, String status) {
+		Connection myConn = super.getConnection();
+		Statement stm;
 		try {
-			Connection myConn = super.getConnection();
-			Statement stm = myConn.createStatement();		
-			stm.executeQuery("UPDATE RULE SET code = \'"+code+"\', SQLCode = "+SQLCode+", categoryId = "+categoryId+", operator = \'"+operator+"\' description = \'"+description+"\', status = \'"+status+"\' WHERE id = "+id);
-			
+			stm = myConn.createStatement();
+			stm.executeQuery("UPDATE RULE " +
+					"SET operator = '"+operator+"', " +
+					"status = '"+status+"' " +
+					"WHERE id = "+id);
+			System.out.println("dsadasdsakjdskjadkjsakjdkasjdasda");
 			myConn.close();
-		}catch(SQLException exc){
-			exc.printStackTrace();	
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
@@ -276,5 +280,63 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 		}
 	}
 
+	public List<String> getIdsOfSetTriggers() {
+		ArrayList<String> ruleList = new ArrayList<String>();
+		try {
+			Connection myConn = super.getConnection();
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery("SELECT id FROM RULE where status = 'executed'");
+
+			while (rs.next()) {
+				ruleList.add(rs.getString("id"));
+			}
+		} catch (SQLException exc) {
+			exc.printStackTrace();
+		}
+		return ruleList;
+	}
+
+	public void removeAttributesByRuleId(int ruleId) {
+    	for(String id : getAttributesByRuleId(ruleId)){
+			removeValuesByAttributeId(id);
+		}
+
+		try {
+			Connection myConn = super.getConnection();
+			Statement stm;
+			stm = myConn.createStatement();
+			stm.executeQuery("DELETE FROM attribute WHERE ruleid = "+ruleId);
+			myConn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	private void removeValuesByAttributeId(String attributeId){
+		try {
+			Connection myConn = super.getConnection();
+			Statement stm;
+			stm = myConn.createStatement();
+			stm.executeQuery("DELETE FROM value WHERE attributeid = "+attributeId);
+			myConn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private List<String> getAttributesByRuleId(int ruleId){
+		ArrayList<String> atributeList = new ArrayList<String>();
+		try {
+			Connection myConn = super.getConnection();
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery("SELECT id FROM attribute where ruleid = "+ruleId);
+
+			while (rs.next()) {
+				atributeList.add(rs.getString("id"));
+			}
+		} catch (SQLException exc) {
+			exc.printStackTrace();
+		}
+		return atributeList;
+	}
 }
 

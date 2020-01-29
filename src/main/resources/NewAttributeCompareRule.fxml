@@ -86,6 +86,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <ComboBox fx:id="updateBox" prefHeight="27.0" prefWidth="464.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
     </children>
