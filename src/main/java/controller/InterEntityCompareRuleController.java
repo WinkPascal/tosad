@@ -45,7 +45,7 @@ public class InterEntityCompareRuleController implements Initializable, Controll
 
 
     public void generate() throws InterruptedException {
-        if( dataBaseCombo.getValue() == null ||
+        if(     dataBaseCombo.getValue() == null ||
                 table1Combo.getValue() == null ||
                 column1Combo.getValue() == null ||
                 operatorCombo.getValue() == null ||
@@ -65,11 +65,13 @@ public class InterEntityCompareRuleController implements Initializable, Controll
             AttributeBuilderInterface attributeBuilder = new AttributeBuilder();
             attributeBuilder.setName(column2Combo.getValue());
             attributeBuilder.setEntity(table2Combo.getValue());
+            attributeBuilder.setValue(new ArrayList<String>());
             attributes.add(attributeBuilder.build());
 
             AttributeBuilderInterface attributeBuilder2 = new AttributeBuilder();
             attributeBuilder2.setEntity(table1Combo.getValue());
             attributeBuilder2.setName(column1Combo.getValue());
+            attributeBuilder2.setValue(new ArrayList<String>());
             attributes.add(attributeBuilder2.build());
 
             Rule rule = new Rule(attributes,"ICMP", "Inter Entity Compare rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");

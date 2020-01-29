@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AttributeBuilder implements AttributeBuilderInterface{
     private String name = null;
-    private ArrayList<String> value = null;
+    private ArrayList<String> value;
     private String entity = null;
     private int dbId = 0;
 
