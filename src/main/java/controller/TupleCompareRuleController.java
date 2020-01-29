@@ -67,14 +67,12 @@ public class TupleCompareRuleController implements Initializable , Controller{
             AttributeBuilderInterface attributeBuilder = new AttributeBuilder();
             attributeBuilder.setEntity(tableCombo.getValue());
             attributeBuilder.setName(column2Combo.getValue());
-            Attribute attribute1 = attributeBuilder.build();
+            attributes.add(attributeBuilder.build());
 
             AttributeBuilderInterface attributeBuilder1 = new AttributeBuilder();
             attributeBuilder1.setEntity(tableCombo.getValue());
             attributeBuilder1.setName(column1Combo.getValue());
-            Attribute attribute2 = attributeBuilder1.build();
-            attributes.add(attribute1);
-            attributes.add(attribute2);
+            attributes.add(attributeBuilder1.build());
 
             Rule rule = new Rule(attributes,"TCMR", "Tuple Compare Rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
             int ruleId = rule.save();
@@ -86,13 +84,14 @@ public class TupleCompareRuleController implements Initializable , Controller{
             currentId = ruleId;
         }
     }
+
     public void set(){
         TransportRule transportRule = new TransportRule(currentId, "set");
         new Client("localhost", 5000, transportRule, this);
         showAlert("Rule met id: " + currentId + " set in database" );
         cancel();
-
     }
+
     public void cancel(){
         dataBaseCombo.getSelectionModel().clearSelection();
         tableCombo.getSelectionModel().clearSelection();
