@@ -1,8 +1,6 @@
 package domain.connection;
 
-import controller.AttributeCompareRuleController;
-import controller.Controller;
-import controller.ViewRulesController;
+import controller.*;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -13,7 +11,7 @@ import java.net.Socket;
 
 
 
-public class Client {
+public class Client  {
 
 
     private Socket socket = null;
@@ -58,6 +56,14 @@ public class Client {
                 if(controller instanceof AttributeCompareRuleController) {
                     AttributeCompareRuleController attributeCompareRuleController = (AttributeCompareRuleController) controller;
                     attributeCompareRuleController.setGeneratedPreviewArea(test);
+                }
+                if(controller instanceof AttributeRangeRuleController){
+                    AttributeRangeRuleController attributeRangeRuleController = (AttributeRangeRuleController) controller;
+                    attributeRangeRuleController.setGeneratedPreviewArea(test);
+                }
+                if (controller instanceof TupleCompareRuleController){
+                    TupleCompareRuleController tupleCompareRuleController = (TupleCompareRuleController) controller;
+                    tupleCompareRuleController.setGeneratedPreviewArea(test);
                 }
                 if(controller instanceof ViewRulesController){
                     ViewRulesController viewRulesController = (ViewRulesController) controller;

@@ -43,7 +43,7 @@
         </font>
     </Label>
     <Separator layoutY="223.0" prefHeight="0.0" prefWidth="382.0" />
-    <TextArea layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
+    <TextArea editable="false" fx:id="previewArea" layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
     <Label layoutX="406.0" layoutY="27.0" text="Preview" textFill="#00bbff">
         <font>
             <Font size="18.0" />
