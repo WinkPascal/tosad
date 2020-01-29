@@ -40,7 +40,9 @@ public class Attribute {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
 		int attributeId = tdb.addAttribute(ruleId, name, entity);
 		this.dbId = attributeId;
-		this.saveValues(attributeId);
+		if (value.size() != 0) {
+			this.saveValues(attributeId);
+		}
 	}
 	
 	public void saveValues(int attributeId) {
