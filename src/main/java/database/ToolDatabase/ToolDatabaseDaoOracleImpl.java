@@ -237,8 +237,43 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 
 	@Override
 	public ArrayList<Rule> getRulesByEntity(String entity) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			ArrayList<Rule> ruleList = new ArrayList<Rule>();
+			
+			Connection myConn = super.getConnection();
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery("SELECT * FROM rule "
+					+ "WHERE (ENTITY.RULEID = RULE.ID) "
+					+ "AND ((SELECT ENTITY FROM ATTRIBUTE) LIKE \'%"+entity+"%\')");
+			
+			while (rs.next()) {
+		        int i = 1;
+		        
+		        List<String> tempList = new ArrayList<String>();
+		        
+		        while(i <= 7) {
+		            tempList.add(rs.getString(i));
+		            if (i == 7) {
+		            	ruleList.add(new Rule(this.getAttributesByRule(Integer.parseInt(tempList.get(0))), 
+		            			tempList.get(1), 
+		            			tempList.get(3), 
+		            			Integer.parseInt(tempList.get(2)), 
+		            			tempList.get(6), 
+		            			tempList.get(5), tempList.get(4), 
+		            			Integer.parseInt(tempList.get(0))));
+		            }
+		            i++;
+		        }
+			}
+			
+			
+			myConn.close();
+			return ruleList;
+			
+		}catch(SQLException exc){
+			exc.printStackTrace();	
+			return null;
+		}
 	}
 
 }
