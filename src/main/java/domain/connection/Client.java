@@ -36,15 +36,23 @@ public class Client  {
 
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             DataInputStream in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-
-            line = transportRule.toJSONString();
-            out.writeUTF(line);
             StringBuilder ruleBuilder = new StringBuilder();
-
-
-            while((lineIn = in.readLine()) != null){
-                ruleBuilder.append(lineIn + "\n");
+            if(controller instanceof AttributeCompareRuleController) {
+                AttributeCompareRuleController attributeCompareRuleController = (AttributeCompareRuleController) controller;
+                line = transportRule.toJSONString();
+                out.writeUTF(line);
+                while((lineIn = in.readLine()) != null){
+                    ruleBuilder.append(lineIn + "\n");
+                }
             }
+            if(controller instanceof ViewRulesController){
+                ViewRulesController viewRulesController = (ViewRulesController) controller;
+                line = transportRule.toJSONString();
+                out.writeUTF(line);
+
+            }
+
+
 
             try {
                 in.close();
