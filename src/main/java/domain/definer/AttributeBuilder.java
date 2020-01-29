@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AttributeBuilder implements AttributeBuilderInterface{
-    private String name;
-    private ArrayList<String> value;
-    private String entity;
-    private int dbId;
+    private String name = null;
+    private ArrayList<String> value = null;
+    private String entity = null;
+    private int dbId = 0;
 
     public void setName(String name){
         this.name = name;
@@ -26,6 +26,7 @@ public class AttributeBuilder implements AttributeBuilderInterface{
     }
 
     public Attribute build(){
-        return new Attribute(name, value, entity, dbId);
+        Attribute attribute =  new Attribute(name, value, entity, dbId);
+        return attribute;
     }
 }

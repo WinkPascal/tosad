@@ -4,8 +4,7 @@ import database.TargetDatabase.TargetDatabaseDAO;
 import database.TargetDatabase.TargetDatabaseDAOOracleImpl;
 import domain.connection.Client;
 import domain.connection.TransportRule;
-import domain.definer.Attribute;
-import domain.definer.Rule;
+import domain.definer.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -59,10 +58,16 @@ public class AttributeRangeRuleController implements Initializable, Controller {
         }
         else {
             ArrayList<String> values = new ArrayList<>();
-            ArrayList<Attribute> attributes = new ArrayList<>();
             values.add(minValue.getText());
             values.add(maxValue.getText());
-            attributes.add((new Attribute(columnCombo.getValue(), values, tableCombo.getValue())));
+
+            ArrayList<Attribute> attributes = new ArrayList<>();
+            AttributeBuilderInterface attributeBuilder = new AttributeBuilder();
+            attributeBuilder.setEntity(tableCombo.getValue());
+            attributeBuilder.setValue(values);
+            attributeBuilder.setName(columnCombo.getValue());
+            attributes.add(attributeBuilder.build());
+
             Rule rule = new Rule(attributes,"ARNG", "Attribute Compare rule", 2, "", null, "GENERATED");
             int ruleId = rule.save();
 
