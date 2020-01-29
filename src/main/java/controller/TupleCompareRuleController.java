@@ -63,14 +63,17 @@ public class TupleCompareRuleController implements Initializable , Controller{
 
         }
         else {
+            ArrayList<String> value = new ArrayList<>();
             ArrayList<Attribute> attributes = new ArrayList<>();
             AttributeBuilderInterface attributeBuilder = new AttributeBuilder();
             attributeBuilder.setEntity(tableCombo.getValue());
+            attributeBuilder.setValue(value);
             attributeBuilder.setName(column2Combo.getValue());
             attributes.add(attributeBuilder.build());
 
             AttributeBuilderInterface attributeBuilder1 = new AttributeBuilder();
             attributeBuilder1.setEntity(tableCombo.getValue());
+            attributeBuilder1.setValue(value);
             attributeBuilder1.setName(column1Combo.getValue());
             attributes.add(attributeBuilder1.build());
 
