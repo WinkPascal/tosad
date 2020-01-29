@@ -5,6 +5,8 @@ import database.TargetDatabase.TargetDatabaseDAOOracleImpl;
 import domain.connection.Client;
 import domain.connection.TransportRule;
 import domain.definer.Attribute;
+import domain.definer.AttributeBuilder;
+import domain.definer.AttributeBuilderInterface;
 import domain.definer.Rule;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -53,34 +55,40 @@ public class AttributeCompareRuleController implements Initializable, Controller
             dataBaseCombo.getValue().trim().isEmpty() ||
             tableCombo.getValue().trim().isEmpty() ||
             columnCombo.getValue().trim().isEmpty() ||
-            operatorCombo.getValue().trim().isEmpty()
-         ) {
-
+            operatorCombo.getValue().trim().isEmpty()) {
             showAlert("Vul alle velden in!");
-
         }
         else {
+            System.out.println("test1");
             ArrayList<String> values = new ArrayList<>();
             ArrayList<Attribute> attributes = new ArrayList<>();
+
             values.add(valueTextField.getText());
-            attributes.add((new Attribute(columnCombo.getValue(), values, tableCombo.getValue())));
+
+            AttributeBuilderInterface attributeBuilder = new AttributeBuilder();
+            attributeBuilder.setName(columnCombo.getValue());
+            attributeBuilder.setValue(values);
+            attributeBuilder.setEntity(tableCombo.getValue());
+            attributes.add(attributeBuilder.build());
+
             Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
             int ruleId = rule.save();
             System.out.println(operatorCombo.getValue());
 
-
+            System.out.println("test3");
             TransportRule transportRule = new TransportRule(ruleId, "generate");
             new Client("localhost",5000,transportRule,this);
             currentId = ruleId;
         }
     }
+
     public void set(){
         TransportRule transportRule = new TransportRule(currentId, "set");
         new Client("localhost", 5000, transportRule, this);
         showAlert("Rule met id: " + currentId + " set in database" );
         cancel();
-
     }
+
     public void cancel(){
         dataBaseCombo.getSelectionModel().clearSelection();
         tableCombo.getSelectionModel().clearSelection();
@@ -94,7 +102,6 @@ public class AttributeCompareRuleController implements Initializable, Controller
         alert.setTitle("Info");
         alert.setHeaderText(null);
         alert.setContentText(content);
-
 
         alert.showAndWait();
     }
@@ -132,7 +139,5 @@ public class AttributeCompareRuleController implements Initializable, Controller
                 }
             }
         });
-
-
     }
 }

@@ -22,7 +22,7 @@ public class Rule {
 		this.attributes = attributes;
 		this.code = code;
 		this.description = description;
-		this.categoryId = categoryId;
+		this.categoryId = 21;
 		this.SQLCode = SQLCode;
 		this.operator = operator;
 		this.status = status;
@@ -32,7 +32,7 @@ public class Rule {
 		this.attributes = attributes;
 		this.code = code;
 		this.description = description;
-		this.categoryId = categoryId;
+		this.categoryId = 21;
 		this.SQLCode = SQLCode;
 		this.operator = operator;
 		this.status = status;

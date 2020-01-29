@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,6 +35,22 @@ public class ViewRulesController implements Initializable, Controller {
         new Client("localhost",5000, (
                 new TransportRule(ruleTableView.getSelectionModel().getSelectedItem().getDbId(),"update")),this);
 
+    }
+    public void remove(){
+        new Client("localhost", 5000,
+                new TransportRule(ruleTableView.getSelectionModel().getSelectedItem().getDbId(), "remove"),this);
+        ruleTableView.getSelectionModel().getSelectedItem().getStatus().replace("executed", "removed");
+        showAlert("rule met id: " + ruleTableView.getSelectionModel().getSelectedItem().getDbId() + " verwijderd" );
+
+    }
+    private void showAlert(String content){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+
+
+        alert.showAndWait();
     }
 
 
