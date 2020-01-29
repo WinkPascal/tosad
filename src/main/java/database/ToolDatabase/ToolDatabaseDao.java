@@ -12,4 +12,6 @@ public interface ToolDatabaseDao {
 	public ArrayList<Rule> getAllRules();
 	public int addRule(String code, String SQLCode, int categoryId, String operator, String description, String status);
 	public void addValue(int attributeId, String value);
+	public ArrayList<Rule> getRulesByCode(String code);
+	public ArrayList<Rule> getRulesByEntity(String entity);
 }
