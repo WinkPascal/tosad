@@ -3,10 +3,16 @@ package domain.definer;
 public class Relation {
 	private String ownerTable;
 	private String referencedTable;
+	private String ownerColumn;
 	
-	public Relation(String ownerTable, String referencedTable) {
+	public Relation(String ownerTable, String ownerColumn, String referencedTable) {
 		this.ownerTable = ownerTable;
+		this.ownerColumn = ownerColumn;
 		this.referencedTable = referencedTable;
+	}
+	
+	public String getOwnerColumn() {
+		return ownerColumn;
 	}
 
 	public String getOwnerTable() {
@@ -18,6 +24,6 @@ public class Relation {
 	}
 	
 	public String toString() {
-		return ownerTable+" references "+referencedTable;
+		return ownerTable+"("+ownerColumn+") references "+referencedTable;
 	}
 }
