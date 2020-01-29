@@ -46,7 +46,7 @@ public class TargetDatabaseDAOOracleImpl extends OracleBaseDAO implements Target
 		try {
 			Connection myConn = super.getConnectionManually("jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC22","TARGET", "TARGET");
 			Statement stm = myConn.createStatement();
-			ResultSet rs = stm.executeQuery("SELECT distinct a.table_name, c_pk.table_name r_table_name "
+			ResultSet rs = stm.executeQuery("SELECT distinct a.table_name, a.column_name, c_pk.table_name r_table_name "
 					+ "FROM all_cons_columns a "
 					+ "JOIN all_constraints c ON a.owner = c.owner "
 					+ "AND a.constraint_name = c.constraint_name "
@@ -56,7 +56,7 @@ public class TargetDatabaseDAOOracleImpl extends OracleBaseDAO implements Target
 					+ "AND a.table_name in (SELECT TABLE_NAME FROM USER_TABLES)");
 			
 			while(rs.next()) {
-				relationList.add(new Relation(rs.getString(1), rs.getString(2)));
+				relationList.add(new Relation(rs.getString(1), rs.getString(2), rs.getString(3)));
 			}
 			return relationList;
 		} catch(Exception e) {
