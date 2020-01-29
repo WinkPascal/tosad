@@ -3,6 +3,7 @@ package domain.definer;
 import java.util.ArrayList;
 
 import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
+import javafx.scene.control.ComboBox;
 
 public class Attribute {
 	private String name;
@@ -22,6 +23,8 @@ public class Attribute {
 		this.entity = entity;
 		this.dbId = dbId;
 	}
+
+
 
 	public String getName() {
 		return name;
@@ -45,8 +48,11 @@ public class Attribute {
 	public void saveValues(int attributeId) {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
 		int i;
-		for(i = 0; i < value.size(); i++) {
-			tdb.addValue(attributeId, value.get(i));
+		if(value != null){
+			for(i = 0; i < value.size(); i++) {
+
+				tdb.addValue(attributeId, value.get(i));
+			}
 		}
 	}
 	
