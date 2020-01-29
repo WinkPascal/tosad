@@ -35,6 +35,10 @@ public class ViewRulesController implements Initializable, Controller {
                 new TransportRule(ruleTableView.getSelectionModel().getSelectedItem().getDbId(),"update")),this);
 
     }
+    public void remove(){
+        new Client("localhost", 5000,
+                new TransportRule(ruleTableView.getSelectionModel().getSelectedItem().getDbId(), "remove"),this);
+    }
 
 
 
