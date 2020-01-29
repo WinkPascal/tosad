@@ -47,9 +47,6 @@ public class AttributeRangeRuleController implements Initializable, Controller {
         if( dataBaseCombo.getValue() == null ||
                 tableCombo.getValue() == null ||
                 columnCombo.getValue() == null ||
-                minValue.textProperty() == null ||
-                maxValue.textProperty() == null ||
-
                 dataBaseCombo.getValue().trim().isEmpty() ||
                 tableCombo.getValue().trim().isEmpty() ||
                 columnCombo.getValue().trim().isEmpty()
@@ -58,17 +55,16 @@ public class AttributeRangeRuleController implements Initializable, Controller {
         }
         else {
             ArrayList<String> values = new ArrayList<>();
+            ArrayList<Attribute> attributes = new ArrayList<>();
             values.add(minValue.getText());
             values.add(maxValue.getText());
-
-            ArrayList<Attribute> attributes = new ArrayList<>();
             AttributeBuilderInterface attributeBuilder = new AttributeBuilder();
             attributeBuilder.setEntity(tableCombo.getValue());
             attributeBuilder.setValue(values);
             attributeBuilder.setName(columnCombo.getValue());
             attributes.add(attributeBuilder.build());
 
-            Rule rule = new Rule(attributes,"ARNG", "Attribute Compare rule", 2, "", null, "GENERATED");
+            Rule rule = new Rule(attributes,"ARNG", "Attribute Range rule", 21, "", null, "GENERATED");
             int ruleId = rule.save();
 
             TransportRule transportRule = new TransportRule(ruleId, "generate");
@@ -98,8 +94,6 @@ public class AttributeRangeRuleController implements Initializable, Controller {
         alert.setTitle("Info");
         alert.setHeaderText(null);
         alert.setContentText(content);
-
-
         alert.showAndWait();
     }
     public void setGeneratedPreviewArea(String preview){

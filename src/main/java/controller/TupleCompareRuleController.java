@@ -76,8 +76,6 @@ public class TupleCompareRuleController implements Initializable , Controller{
 
             Rule rule = new Rule(attributes,"TCMR", "Tuple Compare Rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
             int ruleId = rule.save();
-            System.out.println(operatorCombo.getValue());
-
 
             TransportRule transportRule = new TransportRule(ruleId, "generate");
             new Client("localhost",5000,transportRule,this);
@@ -135,8 +133,6 @@ public class TupleCompareRuleController implements Initializable , Controller{
         operatorCombo.getItems().add("!=");
         operatorCombo.getItems().add(">");
         operatorCombo.getItems().add("<");
-
-
     }
 
 }

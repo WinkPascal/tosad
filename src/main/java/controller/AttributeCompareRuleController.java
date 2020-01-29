@@ -55,11 +55,11 @@ public class AttributeCompareRuleController implements Initializable, Controller
             dataBaseCombo.getValue().trim().isEmpty() ||
             tableCombo.getValue().trim().isEmpty() ||
             columnCombo.getValue().trim().isEmpty() ||
-            operatorCombo.getValue().trim().isEmpty()) {
+            operatorCombo.getValue().trim().isEmpty()
+        ) {
             showAlert("Vul alle velden in!");
         }
         else {
-            System.out.println("test1");
             ArrayList<String> values = new ArrayList<>();
             ArrayList<Attribute> attributes = new ArrayList<>();
 
