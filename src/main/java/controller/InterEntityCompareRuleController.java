@@ -5,6 +5,8 @@ import database.TargetDatabase.TargetDatabaseDAOOracleImpl;
 import domain.connection.Client;
 import domain.connection.TransportRule;
 import domain.definer.Attribute;
+import domain.definer.AttributeBuilder;
+import domain.definer.AttributeBuilderInterface;
 import domain.definer.Rule;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,6 +29,7 @@ public class InterEntityCompareRuleController implements Initializable, Controll
         }
         return INSTANCE;
     }
+
     @FXML public ComboBox<String> dataBaseCombo = new ComboBox();
     @FXML public ComboBox<String> table1Combo = new ComboBox<>();
     @FXML public ComboBox<String> column1Combo = new ComboBox<>();
@@ -59,7 +62,16 @@ public class InterEntityCompareRuleController implements Initializable, Controll
         }
         else {
             ArrayList<Attribute> attributes = new ArrayList<>();
-            //attributes.add((new Attribute(column2Combo.getValue(), table2Combo.getValue(),column1Combo.getValue(), table1Combo.getValue())));
+            AttributeBuilderInterface attributeBuilder = new AttributeBuilder();
+            attributeBuilder.setName(column2Combo.getValue());
+            attributeBuilder.setEntity(table2Combo.getValue());
+            attributes.add(attributeBuilder.build());
+
+            AttributeBuilderInterface attributeBuilder2 = new AttributeBuilder();
+            attributeBuilder2.setEntity(table1Combo.getValue());
+            attributeBuilder2.setName(column1Combo.getValue());
+            attributes.add(attributeBuilder2.build());
+
             Rule rule = new Rule(attributes,"ICMP", "Inter Entity Compare rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
             int ruleId = rule.save();
             System.out.println(operatorCombo.getValue());
@@ -70,6 +82,7 @@ public class InterEntityCompareRuleController implements Initializable, Controll
             currentId = ruleId;
         }
     }
+
     public void set(){
         TransportRule transportRule = new TransportRule(currentId, "set");
         new Client("localhost", 5000, transportRule, this);
@@ -91,7 +104,6 @@ public class InterEntityCompareRuleController implements Initializable, Controll
         alert.setTitle("Info");
         alert.setHeaderText(null);
         alert.setContentText(content);
-
 
         alert.showAndWait();
     }
@@ -122,7 +134,7 @@ public class InterEntityCompareRuleController implements Initializable, Controll
             @Override
             public void changed(ObservableValue ov, String t, String t1) {
                 column2Combo.getItems().setAll(targetDatabase.getAllColumns(table2Combo.getValue()));
-            }
+            };
         });
 
         //operators
@@ -130,6 +142,5 @@ public class InterEntityCompareRuleController implements Initializable, Controll
         operatorCombo.getItems().add("!=");
         operatorCombo.getItems().add(">");
         operatorCombo.getItems().add("<");
-
     }
 }
