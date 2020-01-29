@@ -23,7 +23,7 @@ public class Attribute {
 		this.entity = entity;
 		this.dbId = dbId;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
