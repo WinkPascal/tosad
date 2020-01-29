@@ -242,9 +242,9 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 			
 			Connection myConn = super.getConnection();
 			Statement stm = myConn.createStatement();
-			ResultSet rs = stm.executeQuery("SELECT * FROM rule "
-					+ "WHERE (ENTITY.RULEID = RULE.ID) "
-					+ "AND ((SELECT ENTITY FROM ATTRIBUTE) LIKE \'%"+entity+"%\')");
+			ResultSet rs = stm.executeQuery("SELECT r.id, r.code, r.categoryId, r.description, r.status, r.operator, r.SQLCode"
+					+ " FROM rule r, attribute a "
+					+ "WHERE (a.RULEID = r.ID) AND (a.ENTITY LIKE \'%"+entity+"%\')");
 			
 			while (rs.next()) {
 		        int i = 1;

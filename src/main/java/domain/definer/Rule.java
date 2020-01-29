@@ -91,8 +91,11 @@ public class Rule {
 	}
 	
 	public String toString() {
-		return "("+attributes +", "+ code +", "+ description +", "+ SQLCode +", "+ categoryId +", "+ operator +", "+ status +", "+ dbId+")";
-	}
+		if (SQLCode != null) {
+			return "("+attributes +", "+ code +", "+ description +", "+ SQLCode.length() +", "+ categoryId +", "+ operator +", "+ status +", "+ dbId+")";
+		}
+		return "("+attributes +", "+ code +", "+ description +", "+ categoryId +", "+ operator +", "+ status +", "+ dbId+")";
+		}
 
 	public ArrayList<Attribute> getAttributes() {
 		return attributes;
