@@ -85,7 +85,7 @@
         </rowConstraints>
          <children>
             <Label text="ID" GridPane.rowIndex="1" />
-            <ComboBox prefHeight="27.0" prefWidth="464.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="updateBox" prefHeight="27.0" prefWidth="464.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button layoutX="19.0" layoutY="530.0" mnemonicParsing="false" text="Update" />

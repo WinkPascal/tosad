@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -45,7 +46,7 @@ public class AttributeCompareRuleController implements Initializable, Controller
 
     @FXML public TextArea previewArea;
 
-
+    @FXML public ComboBox<String> updateBox = new ComboBox<>();
 
     public void generate() throws InterruptedException {
         if( dataBaseCombo.getValue() == null ||
@@ -72,10 +73,17 @@ public class AttributeCompareRuleController implements Initializable, Controller
             attributes.add(attributeBuilder.build());
 
             Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
-            int ruleId = rule.save();
-            System.out.println(operatorCombo.getValue());
 
-            System.out.println("test3");
+            int ruleId = 0;
+            String updateBoxValue = updateBox.getValue();
+            if(updateBoxValue != null){
+                ruleId = Integer.parseInt(updateBoxValue);
+            }
+            if(ruleId == 0){
+                ruleId = rule.save();
+            } else{
+                ruleId = rule.update(ruleId);
+            }
             TransportRule transportRule = new TransportRule(ruleId, "generate");
             new Client("localhost",5000,transportRule,this);
             currentId = ruleId;
@@ -112,7 +120,10 @@ public class AttributeCompareRuleController implements Initializable, Controller
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         dataBaseCombo.getItems().setAll("Generic_Database");
+
+        updateBox.getItems().setAll(Rule.getIdsOfSetTriggers());
 
         TargetDatabaseDAO targetDatabase =  TargetDatabaseDAOOracleImpl.getInstance();
 

@@ -2,6 +2,8 @@ package domain.definer;
 
 import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -49,10 +51,28 @@ public class Rule {
 			currentAttribute.save(dbId);
 		}
 		return dbId;
-		
 	}
-	
-	public void addAttribute(Attribute attr) {
+
+	public int update(int ruleId) {
+		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
+		tdb.updateRuleById(ruleId, this.operator, this.status);
+
+		tdb.removeAttributesByRuleId(ruleId);
+		int i;
+		int length = attributes.size();
+		for(i = 0; i < length; i++) {
+			Attribute currentAttribute = attributes.get(i);
+			currentAttribute.save(ruleId);
+		}
+		return ruleId;
+	}
+
+	public static List<String> getIdsOfSetTriggers() {
+		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
+		return tdb.getIdsOfSetTriggers();
+	}
+
+		public void addAttribute(Attribute attr) {
 		attributes.add(attr);
 	}
 	
@@ -85,9 +105,6 @@ public class Rule {
 		ruleJSONObject.put("attribute",attributeJSONArray);
 
 		return ruleJSONObject.toJSONString();
-
-
-
 	}
 	
 	public String toString() {
@@ -125,4 +142,6 @@ public class Rule {
 	public int getDbId() {
 		return dbId;
 	}
+
+
 }
