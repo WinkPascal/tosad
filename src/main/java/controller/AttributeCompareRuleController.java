@@ -60,15 +60,17 @@ public class AttributeCompareRuleController implements Initializable, Controller
 
         }
         else {
+            System.out.println("test1");
             ArrayList<String> values = new ArrayList<>();
             ArrayList<Attribute> attributes = new ArrayList<>();
             values.add(valueTextField.getText());
             attributes.add((new Attribute(columnCombo.getValue(), values, tableCombo.getValue())));
-            Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
+            Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 21, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
+            System.out.println("test2");
             int ruleId = rule.save();
             System.out.println(operatorCombo.getValue());
 
-
+            System.out.println("test3");
             TransportRule transportRule = new TransportRule(ruleId, "generate");
             new Client("localhost",5000,transportRule,this);
             currentId = ruleId;

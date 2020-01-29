@@ -1,6 +1,9 @@
 package domain.connection;
 
-import controller.*;
+import controller.AttributeCompareRuleController;
+import controller.AttributeRangeRuleController;
+import controller.Controller;
+import controller.ViewRulesController;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -11,7 +14,7 @@ import java.net.Socket;
 
 
 
-public class Client  {
+public class Client {
 
 
     private Socket socket = null;
@@ -45,6 +48,14 @@ public class Client  {
                     ruleBuilder.append(lineIn + "\n");
                 }
             }
+            if(controller instanceof AttributeRangeRuleController) {
+                AttributeRangeRuleController attributeRangeRuleController = (AttributeRangeRuleController) controller;
+                line = transportRule.toJSONString();
+                out.writeUTF(line);
+                while((lineIn = in.readLine()) != null){
+                    ruleBuilder.append(lineIn + "\n");
+                }
+            }
             if(controller instanceof ViewRulesController){
                 ViewRulesController viewRulesController = (ViewRulesController) controller;
                 line = transportRule.toJSONString();
@@ -65,13 +76,9 @@ public class Client  {
                     AttributeCompareRuleController attributeCompareRuleController = (AttributeCompareRuleController) controller;
                     attributeCompareRuleController.setGeneratedPreviewArea(test);
                 }
-                if(controller instanceof AttributeRangeRuleController){
+                if(controller instanceof AttributeRangeRuleController) {
                     AttributeRangeRuleController attributeRangeRuleController = (AttributeRangeRuleController) controller;
                     attributeRangeRuleController.setGeneratedPreviewArea(test);
-                }
-                if (controller instanceof TupleCompareRuleController){
-                    TupleCompareRuleController tupleCompareRuleController = (TupleCompareRuleController) controller;
-                    tupleCompareRuleController.setGeneratedPreviewArea(test);
                 }
                 if(controller instanceof ViewRulesController){
                     ViewRulesController viewRulesController = (ViewRulesController) controller;
