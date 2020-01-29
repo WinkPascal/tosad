@@ -66,14 +66,9 @@
         <Button fx:id="generateButton" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#generate" text="Generate" />
         <Button fx:id="setButton" layoutX="161.0" layoutY="359.0" mnemonicParsing="false" onAction="#set" prefHeight="27.0" prefWidth="60.0" text="Set" />
         <Button fx:id="cancelButton" layoutX="314.0" layoutY="359.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-      <Separator layoutY="404.0" prefHeight="3.0" prefWidth="382.0" />
+      <Separator layoutY="428.0" prefHeight="3.0" prefWidth="382.0" />
       <Label layoutX="33.0" layoutY="400.0" />
-      <Label layoutX="20.0" layoutY="417.0" text="Update" textFill="#00bbff">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <GridPane layoutX="14.0" layoutY="440.0" prefHeight="90.0" prefWidth="353.0">
+      <GridPane layoutX="14.0" layoutY="440.0" prefHeight="130.0" prefWidth="353.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="111.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="336.0" minWidth="10.0" prefWidth="249.0" />
@@ -85,11 +80,15 @@
         </rowConstraints>
          <children>
             <Label text="ID" GridPane.rowIndex="1" />
+            <ComboBox prefHeight="27.0" prefWidth="464.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Update" textFill="#00bbff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
             <ComboBox fx:id="updateBox" prefHeight="27.0" prefWidth="464.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="19.0" layoutY="530.0" mnemonicParsing="false" text="Update" />
-      <Button layoutX="315.0" layoutY="530.0" mnemonicParsing="false" text="Cancel" />
     </children>
     <opaqueInsets>
         <Insets />
