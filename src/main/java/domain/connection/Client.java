@@ -81,6 +81,9 @@ public class Client {
                 ViewRulesController viewRulesController = (ViewRulesController) controller;
                 line = transportRule.toJSONString();
                 out.writeUTF(line);
+                while ((lineIn = in.readLine()) != null){
+                    ruleBuilder.append( lineIn );
+                }
 
             }
 
@@ -91,30 +94,30 @@ public class Client {
                 out.close();
                 socket.close();
                 System.out.println("closing connection");
-                String test = ruleBuilder.toString();
-                System.out.println(test);
+                System.out.println(ruleBuilder.toString());
                 if(controller instanceof AttributeCompareRuleController) {
                     AttributeCompareRuleController attributeCompareRuleController = (AttributeCompareRuleController) controller;
-                    attributeCompareRuleController.setGeneratedPreviewArea(test);
+                    attributeCompareRuleController.setGeneratedPreviewArea(ruleBuilder.toString());
                 }
                 if(controller instanceof AttributeRangeRuleController) {
                     AttributeRangeRuleController attributeRangeRuleController = (AttributeRangeRuleController) controller;
-                    attributeRangeRuleController.setGeneratedPreviewArea(test);
+                    attributeRangeRuleController.setGeneratedPreviewArea(ruleBuilder.toString());
                 }
                 if(controller instanceof AttributeListRuleController) {
                     AttributeListRuleController attributeListRuleController = (AttributeListRuleController) controller;
-                    attributeListRuleController.setGeneratedPreviewArea(test);
+                    attributeListRuleController.setGeneratedPreviewArea(ruleBuilder.toString());
                 }
                 if(controller instanceof TupleCompareRuleController) {
                     TupleCompareRuleController tupleCompareRuleController = (TupleCompareRuleController) controller;
-                    tupleCompareRuleController.setGeneratedPreviewArea(test);
+                    tupleCompareRuleController.setGeneratedPreviewArea(ruleBuilder.toString());
                 }
                 if(controller instanceof InterEntityCompareRuleController) {
                     InterEntityCompareRuleController interEntityCompareRuleController =(InterEntityCompareRuleController) controller;
-                    interEntityCompareRuleController.setGeneratedPreviewArea(test);
+                    interEntityCompareRuleController.setGeneratedPreviewArea(ruleBuilder.toString());
                 }
                 if(controller instanceof ViewRulesController){
                     ViewRulesController viewRulesController = (ViewRulesController) controller;
+                    viewRulesController.showAlert(ruleBuilder.toString());
 
                 }
 

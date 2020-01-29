@@ -41,21 +41,20 @@
             </font>
         </Label>
         <Separator layoutY="223.0" prefHeight="0.0" prefWidth="382.0" />
-        <TextArea editable="false" fx:id="previewArea" layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
+        <TextArea fx:id="previewArea" editable="false" layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
         <Label layoutX="406.0" layoutY="27.0" text="Preview" textFill="#00bbff">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <GridPane layoutX="14.0" layoutY="282.0" prefHeight="137.0" prefWidth="360.0">
+        <GridPane layoutX="11.0" layoutY="258.0" prefHeight="85.0" prefWidth="360.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="107.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="253.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label text="Value" />
@@ -64,9 +63,33 @@
             <ComboBox fx:id="operatorCombo" prefHeight="27.0" prefWidth="325.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
         </GridPane>
-        <Button fx:id="generateButton" onAction="#generate" layoutX="14.0" layoutY="538.0" mnemonicParsing="false" text="Generate" />
-        <Button fx:id="setButton" onAction="#set" layoutX="161.0" layoutY="538.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Set" />
-        <Button fx:id="cancelButton" onAction="#cancel" layoutX="317.0" layoutY="538.0" mnemonicParsing="false" text="Cancel" />
+        <Button fx:id="generateButton" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#generate" text="Generate" />
+        <Button fx:id="setButton" layoutX="161.0" layoutY="359.0" mnemonicParsing="false" onAction="#set" prefHeight="27.0" prefWidth="60.0" text="Set" />
+        <Button fx:id="cancelButton" layoutX="314.0" layoutY="359.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <Separator layoutY="404.0" prefHeight="3.0" prefWidth="382.0" />
+      <Label layoutX="33.0" layoutY="400.0" />
+      <Label layoutX="20.0" layoutY="417.0" text="Update" textFill="#00bbff">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="14.0" layoutY="440.0" prefHeight="90.0" prefWidth="353.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="111.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="336.0" minWidth="10.0" prefWidth="249.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="ID" GridPane.rowIndex="1" />
+            <ComboBox prefHeight="27.0" prefWidth="464.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Button layoutX="19.0" layoutY="530.0" mnemonicParsing="false" text="Update" />
+      <Button layoutX="315.0" layoutY="530.0" mnemonicParsing="false" text="Cancel" />
     </children>
     <opaqueInsets>
         <Insets />

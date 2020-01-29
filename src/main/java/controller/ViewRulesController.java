@@ -39,11 +39,12 @@ public class ViewRulesController implements Initializable, Controller {
     public void remove(){
         new Client("localhost", 5000,
                 new TransportRule(ruleTableView.getSelectionModel().getSelectedItem().getDbId(), "remove"),this);
-        ruleTableView.getSelectionModel().getSelectedItem().getStatus().replace("executed", "removed");
-        showAlert("rule met id: " + ruleTableView.getSelectionModel().getSelectedItem().getDbId() + " verwijderd" );
+        ruleObservableList = FXCollections.observableArrayList(toolDatabaseDaoOracle.getAllRules());
+
+
 
     }
-    private void showAlert(String content){
+    public void showAlert(String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText(null);
