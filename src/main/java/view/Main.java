@@ -113,9 +113,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-    	ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
-    	System.out.println(tdb.getRulesByCode("ACMP"));
-    	System.out.println(tdb.getRulesByEntity("PRODUCTEN"));
     	launch(args);
     }
 }

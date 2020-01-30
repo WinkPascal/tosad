@@ -18,7 +18,7 @@ public class TransportRule {
 
 
 
-        transportRuleJSONObject.put("ruleId", ruleId );
+        transportRuleJSONObject.put("ruleId", ruleId);
         transportRuleJSONObject.put("method", method);
 
 

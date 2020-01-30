@@ -162,124 +162,23 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 
 	@Override
 	public ArrayList<Rule> getAllRules() {
-		try {
-			ArrayList<Rule> ruleList = new ArrayList<Rule>();
-			
-			Connection myConn = super.getConnection();
-			Statement stm = myConn.createStatement();
-			ResultSet rs = stm.executeQuery("SELECT * FROM RULE");
-			
-			while (rs.next()) {
-		        int i = 1;
-		        
-		        List<String> tempList = new ArrayList<String>();
-		        
-		        while(i <= 7) {
-		            tempList.add(rs.getString(i));
-		            if (i == 7) {
-		            	ruleList.add(new Rule(this.getAttributesByRule(Integer.parseInt(tempList.get(0))), 
-		            			tempList.get(1), 
-		            			tempList.get(3), 
-		            			Integer.parseInt(tempList.get(2)), 
-		            			tempList.get(6), 
-		            			tempList.get(5), tempList.get(4), 
-		            			Integer.parseInt(tempList.get(0))));
-		            }
-		            i++;
-		        }
-			}
-			
-			
-			myConn.close();
-			return ruleList;
-			
-		}catch(SQLException exc){
-			exc.printStackTrace();	
-			return null;
-		}
+		return this.getRuleList("SELECT * FROM RULE");
 	}
 
 	@Override
 	public ArrayList<Rule> getRulesByCode(String code) {
-		try {
-			ArrayList<Rule> ruleList = new ArrayList<Rule>();
-			
-			Connection myConn = super.getConnection();
-			Statement stm = myConn.createStatement();
-			ResultSet rs = stm.executeQuery("SELECT * FROM rule "
+		return this.getRuleList("SELECT * FROM rule "
 					+ "WHERE code LIKE \'%"+code+"%\'");
-			
-			while (rs.next()) {
-		        int i = 1;
-		        
-		        List<String> tempList = new ArrayList<String>();
-		        
-		        while(i <= 7) {
-		            tempList.add(rs.getString(i));
-		            if (i == 7) {
-		            	ruleList.add(new Rule(this.getAttributesByRule(Integer.parseInt(tempList.get(0))), 
-		            			tempList.get(1), 
-		            			tempList.get(3), 
-		            			Integer.parseInt(tempList.get(2)), 
-		            			tempList.get(6), 
-		            			tempList.get(5), tempList.get(4), 
-		            			Integer.parseInt(tempList.get(0))));
-		            }
-		            i++;
-		        }
-			}
-			
-			
-			myConn.close();
-			return ruleList;
-			
-		}catch(SQLException exc){
-			exc.printStackTrace();	
-			return null;
-		}
 	}
 
 	@Override
 	public ArrayList<Rule> getRulesByEntity(String entity) {
-		try {
-			ArrayList<Rule> ruleList = new ArrayList<Rule>();
-			
-			Connection myConn = super.getConnection();
-			Statement stm = myConn.createStatement();
-			ResultSet rs = stm.executeQuery("SELECT r.id, r.code, r.categoryId, r.description, r.status, r.operator, r.SQLCode"
+		return (this.getRuleList("SELECT r.id, r.code, r.categoryId, r.description, r.status, r.operator, r.SQLCode"
 					+ " FROM rule r, attribute a "
-					+ "WHERE (a.RULEID = r.ID) AND (a.ENTITY LIKE \'%"+entity+"%\')");
-			
-			while (rs.next()) {
-		        int i = 1;
-		        
-		        List<String> tempList = new ArrayList<String>();
-		        
-		        while(i <= 7) {
-		            tempList.add(rs.getString(i));
-		            if (i == 7) {
-		            	ruleList.add(new Rule(this.getAttributesByRule(Integer.parseInt(tempList.get(0))), 
-		            			tempList.get(1), 
-		            			tempList.get(3), 
-		            			Integer.parseInt(tempList.get(2)), 
-		            			tempList.get(6), 
-		            			tempList.get(5), tempList.get(4), 
-		            			Integer.parseInt(tempList.get(0))));
-		            }
-		            i++;
-		        }
-			}
-			
-			
-			myConn.close();
-			return ruleList;
-			
-		}catch(SQLException exc){
-			exc.printStackTrace();	
-			return null;
-		}
+					+ "WHERE (a.RULEID = r.ID) AND (a.ENTITY LIKE \'%"+entity+"%\')"));
 	}
-
+	
+	@Override
 	public List<String> getIdsOfSetTriggers() {
 		ArrayList<String> ruleList = new ArrayList<String>();
 		try {
@@ -337,6 +236,45 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 			exc.printStackTrace();
 		}
 		return atributeList;
+	}
+
+	@Override
+	public ArrayList<Rule> getRuleList(String query) {
+		try {
+			ArrayList<Rule> ruleList = new ArrayList<Rule>();
+			
+			Connection myConn = super.getConnection();
+			Statement stm = myConn.createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			
+			while (rs.next()) {
+		        int i = 1;
+		        
+		        List<String> tempList = new ArrayList<String>();
+		        
+		        while(i <= 7) {
+		            tempList.add(rs.getString(i));
+		            if (i == 7) {
+		            	ruleList.add(new Rule(this.getAttributesByRule(Integer.parseInt(tempList.get(0))), 
+		            			tempList.get(1), 
+		            			tempList.get(3), 
+		            			Integer.parseInt(tempList.get(2)), 
+		            			tempList.get(6), 
+		            			tempList.get(5), tempList.get(4), 
+		            			Integer.parseInt(tempList.get(0))));
+		            }
+		            i++;
+		        }
+			}
+			
+			
+			myConn.close();
+			return ruleList;
+			
+		}catch(SQLException exc){
+			exc.printStackTrace();	
+			return null;
+		}
 	}
 }
 
