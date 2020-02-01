@@ -62,22 +62,23 @@ public class TupleCompareRuleController implements Initializable , Controller{
             showAlert("Vul alle velden in!");
 
         }
+
         else {
             ArrayList<String> value = new ArrayList<>();
             ArrayList<Attribute> attributes = new ArrayList<>();
             AttributeBuilderInterface attributeBuilder = new AttributeBuilder();
-            attributeBuilder.setEntity(tableCombo.getValue());
+            attributeBuilder.setEntity(tableCombo.getSelectionModel().getSelectedItem().toString());
             attributeBuilder.setValue(value);
-            attributeBuilder.setName(column2Combo.getValue());
+            attributeBuilder.setName(column2Combo.getSelectionModel().getSelectedItem().toString());
             attributes.add(attributeBuilder.build());
 
             AttributeBuilderInterface attributeBuilder1 = new AttributeBuilder();
-            attributeBuilder1.setEntity(tableCombo.getValue());
+            attributeBuilder1.setEntity(tableCombo.getSelectionModel().getSelectedItem().toString());
             attributeBuilder1.setValue(value);
-            attributeBuilder1.setName(column1Combo.getValue());
+            attributeBuilder1.setName(column1Combo.getSelectionModel().getSelectedItem().toString());
             attributes.add(attributeBuilder1.build());
 
-            Rule rule = new Rule(attributes,"TCMR", "Tuple Compare Rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
+            Rule rule = new Rule(attributes,"TCMP", "Tuple Compare Rule", 21, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
             int ruleId = rule.save();
 
             TransportRule transportRule = new TransportRule(ruleId, "generate");

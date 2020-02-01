@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewRulesController">
@@ -15,9 +17,13 @@
             <TableColumn fx:id="sqlCodeColumn" prefWidth="361.0" text="SQL CODE" />
             <TableColumn fx:id="databaseIdColumn" prefWidth="78.0" text="Database ID" />
             <TableColumn fx:id="statusColumn" prefWidth="90.0" text="Status" />
+
         </columns>
       </TableView>
-      <Button layoutX="20.0" layoutY="533.0" mnemonicParsing="false" text="Delete" onAction="#remove" />
+      <Button layoutX="20.0" layoutY="533.0" mnemonicParsing="false" onAction="#remove" text="Delete" />
       <Button layoutX="99.0" layoutY="533.0" mnemonicParsing="false" onAction="#update" text="Update" />
+      <ComboBox fx:id="columnCombo" layoutX="378.0" layoutY="533.0" prefWidth="150.0" promptText="Column" />
+      <TextField fx:id="queryTextField" layoutX="547.0" layoutY="533.0" promptText="Query" />
+      <Button fx:id="searchButton" onAction="#search" layoutX="723.0" layoutY="533.0" mnemonicParsing="false" text="Search" />
    </children>
 </AnchorPane>

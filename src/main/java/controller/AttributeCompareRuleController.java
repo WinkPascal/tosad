@@ -72,7 +72,7 @@ public class AttributeCompareRuleController implements Initializable, Controller
             attributeBuilder.setEntity(tableCombo.getValue());
             attributes.add(attributeBuilder.build());
 
-            Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
+            Rule rule = new Rule(attributes,"ACMP", "Attribute Compare rule", 21, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
 
             int ruleId = 0;
             String updateBoxValue = updateBox.getValue();
