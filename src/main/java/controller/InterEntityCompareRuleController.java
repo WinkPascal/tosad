@@ -74,7 +74,7 @@ public class InterEntityCompareRuleController implements Initializable, Controll
             attributeBuilder2.setValue(new ArrayList<String>());
             attributes.add(attributeBuilder2.build());
 
-            Rule rule = new Rule(attributes,"ICMP", "Inter Entity Compare rule", 2, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
+            Rule rule = new Rule(attributes,"ICMP", "Inter Entity Compare rule", 21, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
             int ruleId = rule.save();
             System.out.println(operatorCombo.getValue());
 

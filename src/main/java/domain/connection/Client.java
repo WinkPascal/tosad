@@ -112,9 +112,9 @@ public class Client {
                     tupleCompareRuleController.setGeneratedPreviewArea(ruleBuilder.toString());
                 }
                 if(controller instanceof InterEntityCompareRuleController) {
-                    System.out.print("teeessstt");
                     InterEntityCompareRuleController interEntityCompareRuleController =(InterEntityCompareRuleController) controller;
                     interEntityCompareRuleController.setGeneratedPreviewArea(ruleBuilder.toString());
+                    System.out.println(ruleBuilder.toString());
                 }
                 if(controller instanceof ViewRulesController){
                     ViewRulesController viewRulesController = (ViewRulesController) controller;
