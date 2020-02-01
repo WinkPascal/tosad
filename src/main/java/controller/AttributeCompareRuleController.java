@@ -77,16 +77,17 @@ public class AttributeCompareRuleController implements Initializable, Controller
             int ruleId = 0;
             String updateBoxValue = updateBox.getValue();
             if(updateBoxValue != null){
-                ruleId = Integer.parseInt(updateBoxValue);
-            }
-            if(ruleId == 0){
-                ruleId = rule.save();
+                System.out.println("update");
+                ruleId = rule.update(Integer.parseInt(updateBoxValue));
+                TransportRule transportRule = new TransportRule(ruleId, "update");
+                new Client("localhost",5000,transportRule,this);
             } else{
-                ruleId = rule.update(ruleId);
+                ruleId = rule.save();
+                TransportRule transportRule = new TransportRule(ruleId, "generate");
+                new Client("localhost",5000,transportRule,this);
             }
-            TransportRule transportRule = new TransportRule(ruleId, "generate");
-            new Client("localhost",5000,transportRule,this);
             currentId = ruleId;
+
         }
     }
 
@@ -123,7 +124,7 @@ public class AttributeCompareRuleController implements Initializable, Controller
 
         dataBaseCombo.getItems().setAll("Generic_Database");
 
-        updateBox.getItems().setAll(Rule.getIdsOfSetTriggers());
+        updateBox.getItems().setAll(Rule.getIdsOfSetTriggersByRuleCode("ACMP"));
 
         TargetDatabaseDAO targetDatabase =  TargetDatabaseDAOOracleImpl.getInstance();
 

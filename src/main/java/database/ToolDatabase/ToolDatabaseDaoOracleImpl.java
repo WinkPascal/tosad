@@ -179,12 +179,13 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 	}
 	
 	@Override
-	public List<String> getIdsOfSetTriggers() {
+	public List<String> getIdsOfSetTriggersByRuleCode(String code) {
 		ArrayList<String> ruleList = new ArrayList<String>();
 		try {
 			Connection myConn = super.getConnection();
 			Statement stm = myConn.createStatement();
-			ResultSet rs = stm.executeQuery("SELECT id FROM RULE where status = 'executed'");
+			ResultSet rs = stm.executeQuery("SELECT id FROM RULE where status = 'executed' AND code = '"+code+"'");
+
 
 			while (rs.next()) {
 				ruleList.add(rs.getString("id"));
