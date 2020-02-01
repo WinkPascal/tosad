@@ -56,8 +56,8 @@ public class Rule {
 	public int update(int ruleId) {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
 		tdb.updateRuleById(ruleId, this.operator, this.status);
-
 		tdb.removeAttributesByRuleId(ruleId);
+
 		int i;
 		int length = attributes.size();
 		for(i = 0; i < length; i++) {
@@ -67,9 +67,9 @@ public class Rule {
 		return ruleId;
 	}
 
-	public static List<String> getIdsOfSetTriggers() {
+	public static List<String> getIdsOfSetTriggersByRuleCode(String code) {
 		ToolDatabaseDaoOracleImpl tdb = ToolDatabaseDaoOracleImpl.getInstance();
-		return tdb.getIdsOfSetTriggers();
+		return tdb.getIdsOfSetTriggersByRuleCode(code);
 	}
 
 		public void addAttribute(Attribute attr) {

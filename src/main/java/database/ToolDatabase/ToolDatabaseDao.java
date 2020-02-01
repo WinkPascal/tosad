@@ -15,6 +15,6 @@ public interface ToolDatabaseDao {
 	public void addValue(int attributeId, String value);
 	public ArrayList<Rule> getRulesByCode(String code);
 	public ArrayList<Rule> getRulesByEntity(String entity);
-}
-	public List<String> getIdsOfSetTriggers();
+	public ArrayList<Rule> getRuleList(String query);
+	public List<String> getIdsOfSetTriggersByRuleCode(String code);
 	}
