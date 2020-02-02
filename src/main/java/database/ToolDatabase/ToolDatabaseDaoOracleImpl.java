@@ -185,6 +185,10 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 					+ " FROM rule r, attribute a "
 					+ "WHERE (a.RULEID = r.ID) AND (a.ENTITY LIKE \'%"+entity+"%\')"));
 	}
+	public ArrayList<Rule> getRuleById(String id) {
+		return this.getRuleList("SELECT * FROM rule "
+				+ "WHERE id LIKE \'%"+id+"%\'");
+	}
 	
 	@Override
 	public List<String> getIdsOfSetTriggersByRuleCode(String code) {

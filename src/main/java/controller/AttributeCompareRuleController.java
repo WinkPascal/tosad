@@ -2,6 +2,7 @@ package controller;
 
 import database.TargetDatabase.TargetDatabaseDAO;
 import database.TargetDatabase.TargetDatabaseDAOOracleImpl;
+import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
 import domain.connection.Client;
 import domain.connection.TransportRule;
 import domain.definer.Attribute;
@@ -142,6 +143,24 @@ public class AttributeCompareRuleController implements Initializable, Controller
         operatorCombo.getItems().add("!=");
         operatorCombo.getItems().add(">");
         operatorCombo.getItems().add("<");
+
+        updateBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                Rule rule = ToolDatabaseDaoOracleImpl.getInstance().getRuleById(updateBox.getSelectionModel().getSelectedItem()).get(0);
+                dataBaseCombo.getSelectionModel().select("Generic_Database");
+                operatorCombo.getSelectionModel().select(rule.getOperator());
+                tableCombo.getSelectionModel().select(rule.getAttributes().get(0).getName());
+                columnCombo.getSelectionModel().select(rule.getAttributes().get(0).getEntity());
+                valueTextField.setText(rule.getAttributes().get(0).getValue().get(0));
+                previewArea.setText(rule.getSQLCode());
+                updateBox.getSelectionModel().select(rule.getDbId());
+                showAlert("rule with id: " + rule.getDbId());
+                cancel();
+
+
+            }
+        });
 
         valueTextField.textProperty().addListener(new ChangeListener<String>() {
             @Override

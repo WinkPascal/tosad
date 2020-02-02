@@ -110,11 +110,14 @@ public class AttributeListRuleController implements Initializable ,Controller {
         tableCombo.getSelectionModel().clearSelection();
         columnCombo.getSelectionModel().clearSelection();
         value.clear();
+        listView.getItems().clear();
     }
     public void addToList(){
+        operatorCombo.setDisable(true);
         valuesObservableList.add(value.getText());
         listView.getItems().clear();
         listView.getItems().addAll(valuesObservableList);
+        value.clear();
 
 
     }
@@ -162,10 +165,9 @@ public class AttributeListRuleController implements Initializable ,Controller {
         });
 
         //operators
-        operatorCombo.getItems().add("==");
-        operatorCombo.getItems().add("!=");
-        operatorCombo.getItems().add(">");
-        operatorCombo.getItems().add("<");
+        operatorCombo.getItems().add("FOUND");
+        operatorCombo.getItems().add("NOT FOUND");
+
 
 
 
