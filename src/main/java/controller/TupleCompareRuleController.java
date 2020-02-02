@@ -130,7 +130,7 @@ public class TupleCompareRuleController implements Initializable , Controller{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataBaseCombo.getItems().setAll("Generic_Database");
 
-        updateBox.getItems().setAll(Rule.getIdsOfSetTriggersByRuleCode("ACMP"));
+        updateBox.getItems().setAll(Rule.getIdsOfSetTriggersByRuleCode("TCMP"));
 
         TargetDatabaseDAO targetDatabase =  TargetDatabaseDAOOracleImpl.getInstance();
 
