@@ -43,6 +43,9 @@ public class AttributeRangeRuleController implements Initializable, Controller {
 
     @FXML public TextArea previewArea;
 
+    @FXML public ComboBox<String> updateBox = new ComboBox<>();
+
+
     public void generate() throws InterruptedException {
         if( dataBaseCombo.getValue() == null ||
                 tableCombo.getValue() == null ||
@@ -65,10 +68,20 @@ public class AttributeRangeRuleController implements Initializable, Controller {
             attributes.add(attributeBuilder.build());
 
             Rule rule = new Rule(attributes,"ARNG", "Attribute Range rule", 21, "", null, "GENERATED");
-            int ruleId = rule.save();
 
-            TransportRule transportRule = new TransportRule(ruleId, "generate");
-            new Client("localhost",5000,transportRule,this);
+            int ruleId = 0;
+            String updateBoxValue = updateBox.getValue();
+            if(updateBoxValue != null){
+                System.out.println("update");
+                ruleId = rule.update(Integer.parseInt(updateBoxValue));
+                TransportRule transportRule = new TransportRule(ruleId, "update");
+                new Client("localhost",5000,transportRule,this);
+            } else{
+                ruleId = rule.save();
+                TransportRule transportRule = new TransportRule(ruleId, "generate");
+                new Client("localhost",5000,transportRule,this);
+            }
+
             currentId = ruleId;
         }
     }
@@ -104,6 +117,8 @@ public class AttributeRangeRuleController implements Initializable, Controller {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         dataBaseCombo.getItems().setAll("Generic_Database");
+
+        updateBox.getItems().setAll(Rule.getIdsOfSetTriggersByRuleCode("ARNG"));
 
         TargetDatabaseDAO targetDatabase =  TargetDatabaseDAOOracleImpl.getInstance();
 

@@ -43,6 +43,7 @@ public class InterEntityCompareRuleController implements Initializable, Controll
     @FXML public Button setButton;
     @FXML public Button cancelButton;
 
+    @FXML public ComboBox<String> updateBox = new ComboBox<>();
 
     public void generate() throws InterruptedException {
         if(     dataBaseCombo.getValue() == null ||
@@ -75,12 +76,19 @@ public class InterEntityCompareRuleController implements Initializable, Controll
             attributes.add(attributeBuilder2.build());
 
             Rule rule = new Rule(attributes,"ICMP", "Inter Entity Compare rule", 21, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
-            int ruleId = rule.save();
-            System.out.println(operatorCombo.getValue());
 
-
-            TransportRule transportRule = new TransportRule(ruleId, "generate");
-            new Client("localhost",5000,transportRule,this);
+            int ruleId = 0;
+            String updateBoxValue = updateBox.getValue();
+            if(updateBoxValue != null){
+                System.out.println("update");
+                ruleId = rule.update(Integer.parseInt(updateBoxValue));
+                TransportRule transportRule = new TransportRule(ruleId, "update");
+                new Client("localhost",5000,transportRule,this);
+            } else{
+                ruleId = rule.save();
+                TransportRule transportRule = new TransportRule(ruleId, "generate");
+                new Client("localhost",5000,transportRule,this);
+            }
             currentId = ruleId;
         }
     }
@@ -118,6 +126,8 @@ public class InterEntityCompareRuleController implements Initializable, Controll
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataBaseCombo.getItems().setAll("Generic_Database");
+
+        updateBox.getItems().setAll(Rule.getIdsOfSetTriggersByRuleCode("ICMP"));
 
         TargetDatabaseDAO targetDatabase =  TargetDatabaseDAOOracleImpl.getInstance();
 

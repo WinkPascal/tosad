@@ -42,6 +42,7 @@ public class AttributeOtherRuleController implements Initializable, Controller {
 
     @FXML public TextArea previewArea;
 
+    @FXML public ComboBox<String> updateBox = new ComboBox<>();
 
     public void generate() throws InterruptedException {
         if( dataBaseCombo.getValue() == null ||
@@ -61,10 +62,19 @@ public class AttributeOtherRuleController implements Initializable, Controller {
             attributes.add(attributeBuilder.build());
             
             Rule rule = new Rule(attributes,"AOTH", "Attribute Other Rule", 21, "", null, "GENERATED");
-            int ruleId = rule.save();
 
-            TransportRule transportRule = new TransportRule(ruleId, "generate");
-            new Client("localhost",5000,transportRule,this);
+            int ruleId = 0;
+            String updateBoxValue = updateBox.getValue();
+            if(updateBoxValue != null){
+                System.out.println("update");
+                ruleId = rule.update(Integer.parseInt(updateBoxValue));
+                TransportRule transportRule = new TransportRule(ruleId, "update");
+                new Client("localhost",5000,transportRule,this);
+            } else{
+                ruleId = rule.save();
+                TransportRule transportRule = new TransportRule(ruleId, "generate");
+                new Client("localhost",5000,transportRule,this);
+            }
             currentId = ruleId;
 
         }
@@ -96,6 +106,7 @@ public class AttributeOtherRuleController implements Initializable, Controller {
     }
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateBox.getItems().setAll(Rule.getIdsOfSetTriggersByRuleCode("AOTH"));
 
         dataBaseCombo.getItems().setAll("Generic_Database");
         TargetDatabaseDAO targetDatabase =  TargetDatabaseDAOOracleImpl.getInstance();

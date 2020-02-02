@@ -44,6 +44,7 @@ public class TupleCompareRuleController implements Initializable , Controller{
 
     @FXML public TextArea previewArea;
 
+    @FXML public ComboBox<String> updateBox = new ComboBox<>();
 
 
     public void generate() throws InterruptedException {
@@ -79,10 +80,19 @@ public class TupleCompareRuleController implements Initializable , Controller{
             attributes.add(attributeBuilder1.build());
 
             Rule rule = new Rule(attributes,"TCMP", "Tuple Compare Rule", 21, "", operatorCombo.getSelectionModel().getSelectedItem().toString(), "GENERATED");
-            int ruleId = rule.save();
 
-            TransportRule transportRule = new TransportRule(ruleId, "generate");
-            new Client("localhost",5000,transportRule,this);
+            int ruleId = 0;
+            String updateBoxValue = updateBox.getValue();
+            if(updateBoxValue != null){
+                System.out.println("update");
+                ruleId = rule.update(Integer.parseInt(updateBoxValue));
+                TransportRule transportRule = new TransportRule(ruleId, "update");
+                new Client("localhost",5000,transportRule,this);
+            } else{
+                ruleId = rule.save();
+                TransportRule transportRule = new TransportRule(ruleId, "generate");
+                new Client("localhost",5000,transportRule,this);
+            }
             currentId = ruleId;
         }
     }
@@ -119,6 +129,8 @@ public class TupleCompareRuleController implements Initializable , Controller{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataBaseCombo.getItems().setAll("Generic_Database");
+
+        updateBox.getItems().setAll(Rule.getIdsOfSetTriggersByRuleCode("ACMP"));
 
         TargetDatabaseDAO targetDatabase =  TargetDatabaseDAOOracleImpl.getInstance();
 

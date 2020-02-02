@@ -27,10 +27,18 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 		Statement stm;
 		try {
 			stm = myConn.createStatement();
-			stm.executeQuery("UPDATE RULE " +
-					"SET operator = '"+operator+"', " +
-					"status = '"+status+"' " +
-					"WHERE id = "+id);
+			if(operator == null){
+				stm.executeQuery("UPDATE RULE " +
+						"SET operator = "+operator+", " +
+						"status = '"+status+"' " +
+						"WHERE id = "+id);
+			} else{
+				stm.executeQuery("UPDATE RULE " +
+						"SET operator = '"+operator+"', " +
+						"status = '"+status+"' " +
+						"WHERE id = "+id);
+			}
+
 			System.out.println("dsadasdsakjdskjadkjsakjdkasjdasda");
 			myConn.close();
 
