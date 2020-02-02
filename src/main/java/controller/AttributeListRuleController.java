@@ -52,6 +52,7 @@ public class AttributeListRuleController implements Initializable ,Controller {
 
     @FXML public ListView listView;
 
+    @FXML public ComboBox<String> updateBox = new ComboBox<>();
 
     ObservableList<String> valuesObservableList = FXCollections.observableArrayList();
 
@@ -80,13 +81,19 @@ public class AttributeListRuleController implements Initializable ,Controller {
             attributes.add(attributeBuilder.build());
 
             Rule rule = new Rule(attributes,"ALIS", "Attribute List rule", 21, "", operatorCombo.getSelectionModel().getSelectedItem(), "GENERATED");
-            int ruleId = rule.save();
-            ToolDatabaseDaoOracleImpl toolDatabaseDao = ToolDatabaseDaoOracleImpl.getInstance();
 
-
-
-            TransportRule transportRule = new TransportRule(ruleId, "generate");
-            new Client("localhost",5000,transportRule,this);
+            int ruleId = 0;
+            String updateBoxValue = updateBox.getValue();
+            if(updateBoxValue != null){
+                System.out.println("update");
+                ruleId = rule.update(Integer.parseInt(updateBoxValue));
+                TransportRule transportRule = new TransportRule(ruleId, "update");
+                new Client("localhost",5000,transportRule,this);
+            } else{
+                ruleId = rule.save();
+                TransportRule transportRule = new TransportRule(ruleId, "generate");
+                new Client("localhost",5000,transportRule,this);
+            }
             currentId = ruleId;
         }
     }
@@ -130,6 +137,7 @@ public class AttributeListRuleController implements Initializable ,Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        updateBox.getItems().setAll(Rule.getIdsOfSetTriggersByRuleCode("ALIS"));
 
         dataBaseCombo.getItems().setAll("Generic_Database");
 

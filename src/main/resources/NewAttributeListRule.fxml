@@ -78,7 +78,7 @@
       </Label>
       <Label layoutX="14.0" layoutY="526.0" text="ID" />
       <Label text="Label" />
-      <ComboBox layoutX="109.0" layoutY="521.0" prefHeight="27.0" prefWidth="269.0" />
+      <ComboBox fx:id="updateBox" layoutX="109.0" layoutY="521.0" prefHeight="27.0" prefWidth="269.0" />
     </children>
     <opaqueInsets>
         <Insets />
