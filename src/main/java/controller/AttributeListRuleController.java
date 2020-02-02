@@ -2,6 +2,8 @@ package controller;
 
 import database.TargetDatabase.TargetDatabaseDAO;
 import database.TargetDatabase.TargetDatabaseDAOOracleImpl;
+import database.ToolDatabase.ToolDatabaseDao;
+import database.ToolDatabase.ToolDatabaseDaoOracleImpl;
 import domain.connection.Client;
 import domain.connection.TransportRule;
 import domain.definer.Attribute;
@@ -10,13 +12,17 @@ import domain.definer.AttributeBuilderInterface;
 import domain.definer.Rule;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class AttributeListRuleController implements Initializable ,Controller {
     private int currentId = 0;
@@ -44,6 +50,12 @@ public class AttributeListRuleController implements Initializable ,Controller {
 
     @FXML public TextArea previewArea;
 
+    @FXML public ListView listView;
+
+
+    ObservableList<String> valuesObservableList = FXCollections.observableArrayList();
+
+    @SuppressWarnings("Duplicates")
     public void generate() throws InterruptedException {
         if( dataBaseCombo.getValue() == null ||
                 tableCombo.getValue() == null ||
@@ -59,9 +71,7 @@ public class AttributeListRuleController implements Initializable ,Controller {
             showAlert("Vul alle velden in!");
         }
         else {
-            ArrayList<String> values = new ArrayList<>();
-            values.add(value.getText());
-
+            ArrayList<String> values = new ArrayList<String>(valuesObservableList);
             ArrayList<Attribute> attributes = new ArrayList<>();
             AttributeBuilderInterface attributeBuilder = new AttributeBuilder();
             attributeBuilder.setEntity(tableCombo.getValue());
@@ -69,8 +79,11 @@ public class AttributeListRuleController implements Initializable ,Controller {
             attributeBuilder.setName(columnCombo.getValue());
             attributes.add(attributeBuilder.build());
 
-            Rule rule = new Rule(attributes,"ALIS", "Attribute List rule", 21, "", null, "GENERATED");
+            Rule rule = new Rule(attributes,"ALIS", "Attribute List rule", 21, "", operatorCombo.getSelectionModel().getSelectedItem(), "GENERATED");
             int ruleId = rule.save();
+            ToolDatabaseDaoOracleImpl toolDatabaseDao = ToolDatabaseDaoOracleImpl.getInstance();
+
+
 
             TransportRule transportRule = new TransportRule(ruleId, "generate");
             new Client("localhost",5000,transportRule,this);
@@ -91,8 +104,15 @@ public class AttributeListRuleController implements Initializable ,Controller {
         columnCombo.getSelectionModel().clearSelection();
         value.clear();
     }
+    public void addToList(){
+        valuesObservableList.add(value.getText());
+        listView.getItems().clear();
+        listView.getItems().addAll(valuesObservableList);
 
 
+    }
+
+    @SuppressWarnings("Duplicates")
     public void showAlert(String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
@@ -106,8 +126,10 @@ public class AttributeListRuleController implements Initializable ,Controller {
         previewArea.setText(preview);
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
         dataBaseCombo.getItems().setAll("Generic_Database");
 

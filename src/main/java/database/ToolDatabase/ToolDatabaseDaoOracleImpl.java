@@ -239,7 +239,7 @@ public class ToolDatabaseDaoOracleImpl extends OracleBaseDAO implements ToolData
 		return atributeList;
 	}
 
-	@Override
+
 	public ArrayList<Rule> getRuleList(String query) {
 		try {
 			ArrayList<Rule> ruleList = new ArrayList<Rule>();
