@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -13,9 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<?import javafx.scene.control.CheckBox?>
-<AnchorPane prefHeight="600" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AttributeRangeRuleController">
+<AnchorPane prefHeight="600" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AttributeRangeRuleController">
 <children>
     <Separator layoutX="381.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="20.0" />
     <GridPane layoutX="14.0" layoutY="66.0" prefHeight="130.0" prefWidth="360.0">
@@ -43,13 +42,13 @@
         </font>
     </Label>
     <Separator layoutY="223.0" prefHeight="0.0" prefWidth="382.0" />
-    <TextArea editable="false" fx:id="previewArea" layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
+    <TextArea fx:id="previewArea" editable="false" layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
     <Label layoutX="406.0" layoutY="27.0" text="Preview" textFill="#00bbff">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <GridPane layoutX="14.0" layoutY="282.0" prefHeight="137.0" prefWidth="360.0">
+    <GridPane layoutX="14.0" layoutY="245.0" prefHeight="169.0" prefWidth="360.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="107.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="253.0" />
@@ -68,9 +67,17 @@
             <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         </children>
     </GridPane>
-    <Button fx:id="generateButton" onAction="#generate" layoutX="14.0" layoutY="538.0" mnemonicParsing="false" text="Generate" />
-    <Button  fx:id="setButton" onAction="#set" layoutX="161.0" layoutY="538.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Set" />
-    <Button fx:id="cancelButton" onAction="#cancel" layoutX="317.0" layoutY="538.0" mnemonicParsing="false" text="Cancel" />
+    <Button fx:id="generateButton" layoutX="14.0" layoutY="414.0" mnemonicParsing="false" onAction="#generate" text="Generate" />
+    <Button fx:id="setButton" layoutX="161.0" layoutY="414.0" mnemonicParsing="false" onAction="#set" prefHeight="27.0" prefWidth="60.0" text="Set" />
+    <Button fx:id="cancelButton" layoutX="317.0" layoutY="414.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <Separator layoutY="455.0" prefHeight="3.0" prefWidth="382.0" />
+      <Label layoutX="14.0" layoutY="467.0" prefHeight="33.0" prefWidth="243.0" text="Attribute Range rule" textFill="#00bbff">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="519.0" text="ID" />
+      <ComboBox layoutX="119.0" layoutY="514.0" prefHeight="27.0" prefWidth="255.0" />
 </children>
 <opaqueInsets>
     <Insets />
