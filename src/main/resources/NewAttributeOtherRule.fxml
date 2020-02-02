@@ -30,10 +30,8 @@
             <children>
                 <Label text="Database" />
                 <Label text="Table" GridPane.rowIndex="1" />
-                <Label text="Column" GridPane.rowIndex="2" />
                 <ComboBox prefHeight="27.0" prefWidth="328.0" GridPane.columnIndex="1" />
                 <ComboBox prefHeight="27.0" prefWidth="336.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <ComboBox prefHeight="27.0" prefWidth="349.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </children>
         </GridPane>
         <Label layoutX="14.0" layoutY="20.0" prefHeight="33.0" prefWidth="243.0" text="Attribute Other rule" textFill="#00bbff">
@@ -61,14 +59,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Start index" />
-                <TextField prefHeight="27.0" prefWidth="70.0" GridPane.columnIndex="1" />
-                <Label text="  End index" GridPane.columnIndex="2" />
-                <TextField GridPane.columnIndex="3" />
-                <Label text="Start range" GridPane.rowIndex="1" />
-                <Label text="  End range" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                <Label text="Input field" />
+                <TextField prefHeight="28.0" prefWidth="350.0" GridPane.columnIndex="1" />
             </children>
         </GridPane>
         <Button layoutX="14.0" layoutY="538.0" mnemonicParsing="false" text="Generate" />
