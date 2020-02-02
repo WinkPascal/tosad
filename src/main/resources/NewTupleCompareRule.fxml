@@ -43,20 +43,18 @@
             </font>
         </Label>
         <Separator layoutX="3.0" layoutY="281.0" prefHeight="0.0" prefWidth="382.0" />
-        <TextArea editable="false" fx:id="previewArea" layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
+        <TextArea fx:id="previewArea" editable="false" layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
         <Label layoutX="406.0" layoutY="27.0" text="Preview" textFill="#00bbff">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <GridPane layoutX="14.0" layoutY="282.0" prefHeight="137.0" prefWidth="360.0">
+        <GridPane layoutX="14.0" layoutY="282.0" prefHeight="81.0" prefWidth="360.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="107.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="253.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
          <children>
@@ -64,9 +62,17 @@
             <ComboBox fx:id="operatorCombo" prefHeight="27.0" prefWidth="368.0" GridPane.columnIndex="1" />
          </children>
         </GridPane>
-        <Button fx:id="generateButton" onAction="#generate" layoutX="14.0" layoutY="538.0" mnemonicParsing="false" text="Generate" />
-        <Button fx:id="setButton" onAction="#set"  layoutX="161.0" layoutY="538.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Set" />
-        <Button  fx:id="cancelButton" onAction="#cancel"  layoutX="317.0" layoutY="538.0" mnemonicParsing="false" text="Cancel" />
+        <Button fx:id="generateButton" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#generate" text="Generate" />
+        <Button fx:id="setButton" layoutX="161.0" layoutY="350.0" mnemonicParsing="false" onAction="#set" prefHeight="27.0" prefWidth="60.0" text="Set" />
+        <Button fx:id="cancelButton" layoutX="317.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <Separator layoutY="386.0" prefHeight="3.0" prefWidth="382.0" />
+      <Label layoutX="14.0" layoutY="399.0" prefHeight="33.0" prefWidth="243.0" text="Update" textFill="#00bbff">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="446.0" text="ID" />
+      <ComboBox layoutX="116.0" layoutY="441.0" prefHeight="23.0" prefWidth="255.0" />
     </children>
     <opaqueInsets>
         <Insets />
