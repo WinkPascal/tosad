@@ -102,13 +102,12 @@ public class AttributeOtherRuleController implements Initializable, Controller {
         tableCombo.getItems().setAll(targetDatabase.getTables());
 
 
-        inputField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
-                    inputField.setText(oldValue);
-                }
-            }
-        });
+//        inputField.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//                    inputField.setText(oldValue);
+//
+//            }
+      //  });
     }
 }
