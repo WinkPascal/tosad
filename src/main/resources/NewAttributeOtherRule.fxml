@@ -30,8 +30,8 @@
             <children>
                 <Label text="Database" />
                 <Label text="Table" GridPane.rowIndex="1" />
-                <ComboBox prefHeight="27.0" prefWidth="328.0" GridPane.columnIndex="1" />
-                <ComboBox prefHeight="27.0" prefWidth="336.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <ComboBox fx:id="dataBaseCombo" prefHeight="27.0" prefWidth="328.0" GridPane.columnIndex="1" />
+                <ComboBox fx:id="tableCombo" prefHeight="27.0" prefWidth="336.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
         </GridPane>
         <Label layoutX="14.0" layoutY="20.0" prefHeight="33.0" prefWidth="243.0" text="Attribute Other rule" textFill="#00bbff">
@@ -40,7 +40,7 @@
             </font>
         </Label>
         <Separator layoutY="223.0" prefHeight="0.0" prefWidth="382.0" />
-        <TextArea layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
+        <TextArea fx:id="previewArea" editable="false" layoutX="400.0" layoutY="72.0" prefHeight="471.0" prefWidth="375.0" />
         <Label layoutX="406.0" layoutY="27.0" text="Preview" textFill="#00bbff">
             <font>
                 <Font size="18.0" />
@@ -60,12 +60,12 @@
             </rowConstraints>
             <children>
                 <Label text="Input field" />
-                <TextField prefHeight="28.0" prefWidth="350.0" GridPane.columnIndex="1" />
+                <TextField fx:id="inputField" prefHeight="28.0" prefWidth="350.0" GridPane.columnIndex="1" />
             </children>
         </GridPane>
-        <Button layoutX="14.0" layoutY="538.0" mnemonicParsing="false" text="Generate" />
-        <Button layoutX="161.0" layoutY="538.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Set" />
-        <Button layoutX="317.0" layoutY="538.0" mnemonicParsing="false" text="Cancel" />
+        <Button fx:id="generateButton" onAction="#generate" layoutX="14.0" layoutY="538.0" mnemonicParsing="false" text="Generate" />
+        <Button fx:id="setButton" onAction="#set" layoutX="161.0" layoutY="538.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Set" />
+        <Button fx:id="cancelButton"  onAction="#cancel" layoutX="317.0" layoutY="538.0" mnemonicParsing="false" text="Cancel" />
     </children>
     <opaqueInsets>
         <Insets />

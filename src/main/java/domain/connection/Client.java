@@ -1,6 +1,7 @@
 package domain.connection;
 
 import controller.*;
+import domain.definer.Attribute;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -61,6 +62,14 @@ public class Client {
                     ruleBuilder.append(lineIn + "\n");
                 }
             }
+            if(controller instanceof AttributeOtherRuleController) {
+                AttributeOtherRuleController attributeOtherRuleController = (AttributeOtherRuleController) controller;
+                line = transportRule.toJSONString();
+                out.writeUTF(line);
+                while((lineIn = in.readLine()) != null){
+                    ruleBuilder.append(lineIn + "\n");
+                }
+            }
             if(controller instanceof TupleCompareRuleController) {
                 TupleCompareRuleController tupleCompareRuleController=(TupleCompareRuleController) controller;
                 line = transportRule.toJSONString();
@@ -106,6 +115,10 @@ public class Client {
                 if(controller instanceof AttributeListRuleController) {
                     AttributeListRuleController attributeListRuleController = (AttributeListRuleController) controller;
                     attributeListRuleController.setGeneratedPreviewArea(ruleBuilder.toString());
+                }
+                if(controller instanceof AttributeOtherRuleController) {
+                    AttributeOtherRuleController attributeOtherRuleController = (AttributeOtherRuleController) controller;
+                    attributeOtherRuleController.setGeneratedPreviewArea(ruleBuilder.toString());
                 }
                 if(controller instanceof TupleCompareRuleController) {
                     TupleCompareRuleController tupleCompareRuleController = (TupleCompareRuleController) controller;
